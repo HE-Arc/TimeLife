@@ -30,5 +30,16 @@ NGINX_HOST_HTTP_PORT=8000
 ```
 docker-compose up -d nginx mysql workspace
 ```
-5. ???
-6. Profit
+5. Enter the workspace
+```
+docker-compose exec bash workspace
+```
+6. Install packages
+```bash
+# For php
+composer install
+# For JS
+npm install
+```
+7. ???
+8. Profit
