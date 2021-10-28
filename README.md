@@ -32,7 +32,7 @@ docker-compose up -d nginx mysql workspace
 ```
 5. Enter the workspace
 ```
-docker-compose exec bash workspace
+docker-compose exec workspace bash
 ```
 6. Install packages
 ```bash
