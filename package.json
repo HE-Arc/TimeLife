@@ -16,6 +16,8 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.10.1",
+        "@inertiajs/inertia-vue": "^0.7.2",
         "buefy": "^0.9.10",
         "vue": "^2.6.14"
     }
