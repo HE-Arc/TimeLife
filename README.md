@@ -56,5 +56,14 @@ npm install
 php artisan key:generate
 ```
 
-9. ???
-10. Profit
+9. If you have already used laradock, somewhere on you computer. 
+  - Enter the `mysql` docker container : `docker-composer exec mysql bash`
+  - connect to mysql with `mysql -u root -p`. Password : `root`
+  - Execute these command :
+```mysql
+CREATE DATABASE IF NOT EXISTS `timelife` COLLATE 'utf8_general_ci' ;
+GRANT ALL ON `timelife`.* TO 'homestead'@'%' ;
+```
+
+10. ???
+11. Profit
