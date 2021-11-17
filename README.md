@@ -16,7 +16,7 @@ git submodule update --init laradock/
 cp .env.example .env
 ```
 
-3. [Laradock] Copy laradock configuration file
+3. **[Laradock]** Copy laradock configuration file
 ```
 cp .env.example .env
 ```
@@ -33,12 +33,12 @@ MYSQL_PASSWORD=secret
 NGINX_HOST_HTTP_PORT=8000
 ```
 
-5. [Laradock] Run the docker container
+5. **[Laradock]** Run the docker container
 ```
 docker-compose up -d nginx mysql workspace
 ```
 
-6. [Laradock] Enter the workspace
+6. **[Laradock]** Enter the workspace
 ```
 docker-compose exec workspace bash
 ```
@@ -56,10 +56,10 @@ npm install
 php artisan key:generate
 ```
 
-9. If you have already used laradock, somewhere on you computer. 
-  - Enter the `mysql` docker container : `docker-composer exec mysql bash`
+9. *[Optional]* If you already have  used Laradock on you computer. 
+  - Enter the `mysql` docker container : `docker-compose exec mysql bash`
   - connect to mysql with `mysql -u root -p`. Password : `root`
-  - Execute these command :
+  - Execute these command two command to create the database :
 ```mysql
 CREATE DATABASE IF NOT EXISTS `timelife` COLLATE 'utf8_general_ci' ;
 GRANT ALL ON `timelife`.* TO 'homestead'@'%' ;
