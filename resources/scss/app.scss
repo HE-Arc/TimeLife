@@ -9,6 +9,11 @@ $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 
+$scheme-main: #FAEEE0;
+$scheme-invert: findColorInvert($scheme-main);
+$navbar-background-color: #7D5A5A;
+
+
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
@@ -76,6 +81,15 @@ $colors: mergeColorMaps(
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("/img/landing-grandma.jpg") no-repeat center center;
+    background-size: cover;
+    img {
+        width: 300px;
+    }
+
+}
 
 // Import Bulma and Buefy styles
 @import "~bulma";

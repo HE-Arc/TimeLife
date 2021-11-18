@@ -4,7 +4,7 @@ require('./bootstrap');
 import Vue from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue';
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+//import 'buefy/dist/buefy.css'
 //import { InertiaProgress } from '@inertiajs/progress';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
