@@ -2,12 +2,19 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: green;
+$primary: #E23E57;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
-$twitter: #4099FF;
-$twitter-invert: findColorInvert($twitter);
+
+$scheme-main: #FAEEE0;
+$scheme-invert: findColorInvert($scheme-main);
+/*$navbar-background-color: #3D0000;
+$navbar-item-color: findColorInvert($navbar-background-color);*/
+
+$dark:#311D3F;
+$dark-invert:findColorInvert($dark);
+
 
 // Lists and maps
 $custom-colors: null !default;
