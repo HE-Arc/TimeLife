@@ -17,7 +17,7 @@
         <template #end>
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a class="button is-primary">
+                    <a class="button is-primary" href="/user">
                         <strong>Sign up</strong>
                     </a>
                     <a class="button is-light">
