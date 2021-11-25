@@ -5,7 +5,7 @@
     <section class="hero is-dark is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <img src="/img/logo.png">
+                <img src="/img/logo_tmp.png">
                 <p class="subtitle">
                     Time to share your Life like never before
                 </p>
