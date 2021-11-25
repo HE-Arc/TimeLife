@@ -1,7 +1,7 @@
 <template>
     <div>
     <Menu />
-    <Head title="Welcome" />
+    <Head title="Home" />
     <section class="hero is-dark is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">

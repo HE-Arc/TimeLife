@@ -7,7 +7,7 @@ import Buefy from 'buefy'
 //import 'buefy/dist/buefy.css'
 //import { InertiaProgress } from '@inertiajs/progress';
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'TimeLife';
 
 Vue.mixin({ methods: { route } });
 Vue.use(Buefy);
