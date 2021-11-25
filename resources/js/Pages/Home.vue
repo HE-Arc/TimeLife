@@ -23,8 +23,14 @@
     <Footer />
     </div>
 </template>
-<style scoped>
-
+<style scoped lang="scss">
+    .hero {
+        background: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url("https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1518&q=80") no-repeat center center;
+        background-size: cover;
+        img {
+            width: 300px;
+        }
+    }
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
