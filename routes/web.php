@@ -25,4 +25,5 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('user', UserController::class);
+Route::resource('/users', UserController::class);
+// Route::post('users/store', [UserController::class, 'store']);

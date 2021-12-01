@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('SignUp', [
-
+                'users' => User::all()
         ]);
 
     }
@@ -24,11 +24,12 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'description' => '',
         ]);
 
         User::create($request->all());
 
-        return Redirect::route("");
+        return Redirect::route('/');
     }
 }

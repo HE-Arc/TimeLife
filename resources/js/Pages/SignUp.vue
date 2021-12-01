@@ -1,0 +1,91 @@
+<template>
+    <div>
+    <Menu />
+    <Head title="Sign up" />
+    <section>
+        <form action="/users" method="POST" @submit.prevent="create">
+            <div class="container has-text-centered">
+                <b-field label="Lastname">
+                    <b-input id="last_name" v-model="form.last_name"></b-input>
+                </b-field>
+
+                <b-field label="Firstname">
+                    <b-input id="first_name" v-model="form.first_name"></b-input>
+                </b-field>
+
+                <b-field label="Email">
+                    <b-input id="email" v-model="form.email" type="email"
+                        maxlength="30">
+                    </b-input>
+                </b-field>
+
+                <b-field label="Password">
+                    <b-input id="password" v-model="form.password" type="password" maxlength="30"></b-input>
+                </b-field>
+
+                <b-field label="Description">
+                    <b-input id="description" v-model="form.description" type="textarea"></b-input>
+                </b-field>
+
+                <div class="buttons">
+
+                    <button type="submit" class="button is-primary"><strong>Submit</strong></button>
+
+                </div>
+
+            </div>
+        </form>
+    </section>
+    <Footer />
+    </div>
+</template>
+
+<style scoped>
+
+</style>
+
+<script>
+import { Head, Link } from "@inertiajs/inertia-vue";
+import Menu from '../Component/Menu.vue';
+import Footer from '../Component/Footer.vue';
+import { Inertia } from '@inertiajs/inertia';
+
+export default {
+    name: "SignUp",
+    data(){
+        return {
+            form: this.$inertia.form({
+                last_name: null,
+                first_name: null,
+                password: null,
+                email: null,
+                description: null,
+            })
+        }
+    },
+    components: {
+        Link,
+        Head,
+        Menu,
+        Footer
+    },
+
+    methods: {
+        create()
+        {
+            console.log("Create")
+            console.log(this.form.last_name)
+            console.log(this.form.first_name)
+            /*Inertia.post('/users', [
+                this.last_name,
+                this.first_name,
+                this.password,
+                this.email,
+            ]
+            )*/
+            this.form.post('/users')
+        }
+    }
+};
+
+</script>
