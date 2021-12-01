@@ -10,7 +10,9 @@ import Buefy from 'buefy'
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'TimeLife';
 
 Vue.mixin({ methods: { route } });
-Vue.use(Buefy);
+Vue.use(Buefy, {
+    defaultIconPack: 'fa',
+});
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
