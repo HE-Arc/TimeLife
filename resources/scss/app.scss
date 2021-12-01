@@ -7,8 +7,8 @@ $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
 
-$scheme-main: #FAEEE0;
-$scheme-invert: findColorInvert($scheme-main);
+$body-background-color: #FAEEE0;
+//$scheme-invert: findColorInvert($scheme-main);
 /*$navbar-background-color: #3D0000;
 $navbar-item-color: findColorInvert($navbar-background-color);*/
 
