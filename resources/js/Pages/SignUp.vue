@@ -73,16 +73,6 @@ export default {
     methods: {
         create()
         {
-            console.log("Create")
-            console.log(this.form.last_name)
-            console.log(this.form.first_name)
-            /*Inertia.post('/users', [
-                this.last_name,
-                this.first_name,
-                this.password,
-                this.email,
-            ]
-            )*/
             this.form.post('/users')
         }
     }

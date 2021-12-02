@@ -16,6 +16,8 @@ use Inertia\Inertia;
 |
 */
 
+
+
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
@@ -26,4 +28,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/users', UserController::class);
-// Route::post('users/store', [UserController::class, 'store']);
+
+Route::get('/login', [UserController::class, 'login']);
+
+Route::post('/loginCheck', [UserController::class, 'loginPost']);
