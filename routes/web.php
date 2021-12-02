@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,6 +16,8 @@ use Inertia\Inertia;
 |
 */
 
+
+
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
@@ -23,3 +26,9 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::resource('/users', UserController::class);
+
+Route::get('/login', [UserController::class, 'login']);
+
+Route::post('/loginCheck', [UserController::class, 'loginPost']);

@@ -7,14 +7,9 @@ $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
 
-$scheme-main: #FAEEE0;
-$scheme-invert: findColorInvert($scheme-main);
-/*$navbar-background-color: #3D0000;
-$navbar-item-color: findColorInvert($navbar-background-color);*/
-
-$dark:#311D3F;
-$dark-invert:findColorInvert($dark);
-
+$body-background-color: #FAEEE0;
+// $scheme-invert: findColorInvert($scheme-main);
+$navbar-background-color: #7D5A5A;
 
 // Lists and maps
 $custom-colors: null !default;
