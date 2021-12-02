@@ -3,45 +3,51 @@
     <Menu />
     <Head title="Sign up" />
     <section>
-        <form action="/users" method="POST" @submit.prevent="create">
-            <div class="container has-text-centered">
-                <b-field label="Lastname">
-                    <b-input id="last_name" v-model="form.last_name"></b-input>
-                </b-field>
+        <div class="box">
+            <form action="/users" method="POST" @submit.prevent="create">
+                <div class="container">
+                    <b-field label="Lastname">
+                        <b-input id="last_name" v-model="form.last_name"></b-input>
+                    </b-field>
 
-                <b-field label="Firstname">
-                    <b-input id="first_name" v-model="form.first_name"></b-input>
-                </b-field>
+                    <b-field label="Firstname">
+                        <b-input id="first_name" v-model="form.first_name"></b-input>
+                    </b-field>
 
-                <b-field label="Email">
-                    <b-input id="email" v-model="form.email" type="email"
-                        maxlength="30">
-                    </b-input>
-                </b-field>
+                    <b-field label="Email">
+                        <b-input id="email" v-model="form.email" type="email"
+                            maxlength="30">
+                        </b-input>
+                    </b-field>
 
-                <b-field label="Password">
-                    <b-input id="password" v-model="form.password" type="password" maxlength="30"></b-input>
-                </b-field>
+                    <b-field label="Password">
+                        <b-input id="password" v-model="form.password" type="password" maxlength="30"></b-input>
+                    </b-field>
 
-                <b-field label="Description">
-                    <b-input id="description" v-model="form.description" type="textarea"></b-input>
-                </b-field>
+                    <b-field label="Description">
+                        <b-input id="description" v-model="form.description" type="textarea"></b-input>
+                    </b-field>
 
-                <div class="buttons">
+                    <div class="buttons">
 
-                    <button type="submit" class="button is-primary"><strong>Submit</strong></button>
+                        <button type="submit" class="button is-primary"><strong>Submit</strong></button>
+
+                    </div>
 
                 </div>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </section>
     <Footer />
     </div>
 </template>
 
 <style scoped>
-
+ section {
+     width: 40vw;
+     padding: 2rem;
+     margin: 0 auto;
+ }
 </style>
 
 <script>

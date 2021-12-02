@@ -3,33 +3,36 @@
     <Head title="Login" />
     <Menu />
     <section>
-        <form action="/loginCheck" method="POST" @submit.prevent="login">
-            <div class="container has-text-centered">
+        <div class="box">
+            <form action="/loginCheck" method="POST" @submit.prevent="login">
+                <div class="container">
 
-                <b-field label="Email">
-                    <b-input id="email" v-model="form.email" type="email">
-                    </b-input>
-                </b-field>
+                    <b-field label="Email">
+                        <b-input id="email" v-model="form.email" type="email"></b-input>
+                    </b-field>
 
-                <b-field label="Password">
-                    <b-input id="password" v-model="form.password" type="password" ></b-input>
-                </b-field>
+                    <b-field label="Password">
+                        <b-input id="password" v-model="form.password" type="password" ></b-input>
+                    </b-field>
 
-                <div class="buttons">
-
-                    <button type="submit" class="button is-primary"><strong>Login</strong></button>
+                    <div class="buttons">
+                        <button type="submit" class="button is-primary"><strong>Login</strong></button>
+                    </div>
 
                 </div>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </section>
     <Footer />
     </div>
 </template>
 
 <style scoped>
-
+ section {
+     width: 40vw;
+     padding: 2rem;
+     margin: 0 auto;
+ }
 </style>
 
 <script>
