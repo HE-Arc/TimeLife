@@ -1,11 +1,11 @@
 <template>
     <div>
     <Menu />
-    <Head title="Welcome" />
+    <Head title="Home" />
     <section class="hero is-dark is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <img src="/img/logo.png">
+                <img src="/img/logo_tmp.png">
                 <p class="subtitle">
                     Time to share your Life like never before
                 </p>
@@ -23,8 +23,14 @@
     <Footer />
     </div>
 </template>
-<style scoped>
-
+<style scoped lang="scss">
+    .hero {
+        background: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url("/img/background.jpg") no-repeat center center;
+        background-size: cover;
+        img {
+            width: 300px;
+        }
+    }
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
