@@ -3,9 +3,7 @@
     <div class="modal-card" style="width: auto">
         <section class="modal-card-body">
             <b-field>
-                <b-upload v-model="dropFiles"
-                          multiple
-                          drag-drop>
+                <b-upload v-model="dropFiles" multiple drag-drop :accept="acceptFiles">
                     <section class="section">
                         <div class="content has-text-centered">
                             <p>
@@ -21,24 +19,15 @@
             </b-field>
 
             <div class="tags">
-                <span v-for="(file, index) in dropFiles"
-                      :key="index"
-                      class="tag is-primary" >
+                <span v-for="(file, index) in dropFiles" :key="index" class="tag is-primary" >
                     {{file.name}}
-                    <button class="delete is-small"
-                            type="button"
-                            @click="deleteDropFile(index)">
-                    </button>
+                    <button class="delete is-small" type="button" @click="deleteDropFile(index)"></button>
                 </span>
             </div>
         </section>
         <footer class="modal-card-foot">
-            <b-button
-                label="Close"
-                @click="$emit('close')" />
-            <b-button
-                label="Upload"
-                type="is-primary" />
+            <b-button label="Close" @click="$emit('close')" />
+            <b-button label="Add to album" type="is-primary" />
         </footer>
     </div>
 </div>
@@ -49,7 +38,8 @@ export default {
     name: "UploadModal",
     data() {
         return {
-            dropFiles: []
+            dropFiles: [],
+            acceptFiles: ".png, .jpg, .jpeg"
         }
     },
     methods: {
