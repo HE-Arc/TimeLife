@@ -1,7 +1,7 @@
 <template>
     <b-navbar class="is-dark">
         <template #brand>
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item :to="{ path: '/' }">
                 <img
                     src="/img/logo_tmp.png"
                     alt="TimeLife, a photo album in a timeline format"
