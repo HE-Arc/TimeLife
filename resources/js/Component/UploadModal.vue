@@ -3,7 +3,7 @@
     <div class="modal-card" style="width: auto">
         <section class="modal-card-body">
             <b-field>
-                <b-upload v-model="dropFiles" multiple drag-drop :accept="acceptFiles">
+                <b-upload v-model="dropFiles" multiple drag-drop :accept="acceptFiles" expanded>
                     <section class="section">
                         <div class="content has-text-centered">
                             <p>
@@ -13,6 +13,7 @@
                                 </b-icon>
                             </p>
                             <p>Drop your images here or click to upload (*.jpg, *.jpeg, *.png)</p>
+                            <p>Max size : 5Mb</p>
                         </div>
                     </section>
                 </b-upload>
