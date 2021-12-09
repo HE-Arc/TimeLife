@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +17,8 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
+
+
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
@@ -26,3 +29,9 @@ Route::get('/', function () {
 });
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
+
+Route::resource('/users', UserController::class);
+
+Route::get('/login', [UserController::class, 'login']);
+
+Route::post('/loginCheck', [UserController::class, 'loginPost']);

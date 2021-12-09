@@ -17,10 +17,10 @@
         <template #end>
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a class="button is-primary">
+                    <a class="button is-primary" href="/users">
                         <strong>Sign up</strong>
                     </a>
-                    <a class="button is-light">
+                    <a class="button is-light" href="/login">
                         Log in
                     </a>
                 </div>
