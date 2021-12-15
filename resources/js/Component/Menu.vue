@@ -8,15 +8,21 @@
                 >
             </b-navbar-item>
         </template>
-        <template #start>
+        <template #start v-if="user">
             <b-navbar-item href="#">
                 Albums
+            </b-navbar-item>
+            <b-navbar-item href="/profil">
+                Profil
             </b-navbar-item>
         </template>
 
         <template #end>
-            <b-navbar-item tag="div">
-                <div class="buttons">
+            <b-navbar-item tag="div" >
+                <div v-if="user" >
+                    Bonjour {{ user.first_name }}
+                </div>
+                <div class="buttons" v-else>
                     <a class="button is-primary" href="/users">
                         <strong>Sign up</strong>
                     </a>
@@ -28,3 +34,12 @@
         </template>
     </b-navbar>
 </template>
+<script>
+export default {
+  computed: {
+    user() {
+      return this.$page.props.user
+    }
+  }
+}
+</script>

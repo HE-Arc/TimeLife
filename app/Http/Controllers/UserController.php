@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 
 class UserController extends Controller
 {
+
     public function index()
     {
         return Inertia::render('SignUp', [
@@ -36,28 +41,39 @@ class UserController extends Controller
         return Inertia::location("/");
     }
 
+    public function profil()
+    {
+        return Inertia::render('Profil', [
+
+        ]);
+    }
+
     public function loginPost(Request $request)
     {
+
         $request->validate([
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
-        $user = User::where($request->all());
+        $user = User::where($request->all())->first();
 
         if($user != null)
         {
-            // TODO a message for success login
-            return Inertia::location("/");
+            Auth::login($user);
+
+            return redirect()->intended('/profil');
         }
         else
         {
-            // TODO a ,message for error login
-            return Inertia::render('Login', [
-
+            // TODO a message for error login
+            return back()->withErrors([
+                'email' => "ERROR",
             ]);
         }
     }
+
+
 
     public function login()
     {
@@ -66,3 +82,8 @@ class UserController extends Controller
         ]);
     }
 }
+
+Inertia::share('user', fn (Request $request) => $request->user()
+        ? $request->user()->only('last_name', 'first_name')
+        : null
+);
