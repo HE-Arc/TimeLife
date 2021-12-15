@@ -56,7 +56,7 @@ export default {
             this.allowUpload = this.checkFileSize()
         },
         checkFileSize() {
-            if (this.dropFiles.empty)
+            if (this.dropFiles.length === 0)
                 return false;
 
             for(let index in this.dropFiles) {
