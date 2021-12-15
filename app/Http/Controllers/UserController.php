@@ -81,6 +81,12 @@ class UserController extends Controller
 
         ]);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Inertia::location("/");
+    }
 }
 
 Inertia::share('user', fn (Request $request) => $request->user()

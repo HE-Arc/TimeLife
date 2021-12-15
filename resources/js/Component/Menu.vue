@@ -19,8 +19,15 @@
 
         <template #end>
             <b-navbar-item tag="div" >
-                <div v-if="user" >
-                    Bonjour {{ user.first_name }}
+                <div v-if="user">
+                    <div>
+                        Bonjour {{ user.first_name }}
+                    </div>
+                    <div class="buttons">
+                        <a class="button is-primary" href="/logout">
+                            <strong>Log out</strong>
+                        </a>
+                    </div>
                 </div>
                 <div class="buttons" v-else>
                     <a class="button is-primary" href="/users">

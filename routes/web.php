@@ -36,3 +36,5 @@ Route::get('/login', [UserController::class, 'login']);
 Route::get('/profil', [UserController::class, 'profil']);
 
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
+
+Route::get('/logout', [UserController::class, 'logout']);
