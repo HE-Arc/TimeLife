@@ -32,7 +32,6 @@ Route::get('/', function () {
 
 
 
-Route::get('/upload', [PhotoController::class, 'upload'])->name("photo.upload");
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
 
