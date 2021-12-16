@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -85,7 +79,8 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return Inertia::location("/");
+
+        return redirect("/");
     }
 }
 
