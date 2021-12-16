@@ -15,6 +15,11 @@ class AlbumController extends Controller
         gallery($request, $id);
     }
 
+    public function create(Request $request)
+    {
+        return Inertia::render('CreateAlbum');
+    }
+
     public function gallery(Request $request, $id)
     {
         $photos = Photo::join('albums','photos.id_album', '=', 'albums.id')
