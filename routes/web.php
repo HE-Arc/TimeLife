@@ -36,6 +36,7 @@ Route::get('/', function () {
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
 
 Route::resource('/users', UserController::class);
+Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
 
 Route::get('/login', [UserController::class, 'login']);
 

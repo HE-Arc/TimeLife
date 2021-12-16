@@ -12,4 +12,20 @@ class PhotoController extends Controller
     {
         return Inertia::render('Upload');
     }
+
+    public function store(Request $request)
+    {
+        return response()->json(["error" => "test"]);
+
+        $request->validate([
+            "images" => "required|image|mimes:jpg,png,jpeg|max:3000"
+        ]);
+
+        return response()->json(["error" => "tes2"]);
+
+        $filenameWithExt = $request->file('image')->getClientOriginalName();// Get Filename
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);// Get just Extension
+        $extension = $request->file('image')->getClientOriginalExtension();// Filename To store
+        $fileNameToStore = $filename. '_'. time().'.'.$extension;// Upload Image$path = $request->file(‘image’)->storeAs(‘public/image’, $fileNameToStore);
+    }
 }
