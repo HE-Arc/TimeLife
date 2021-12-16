@@ -8,9 +8,9 @@
                 <div class="column">
                     <h1 class="title is-2">My Albums</h1>
                 </div>
-                <div class="column is-narrow">
+                <div v-show="myAlbums.length > 0" class="column is-narrow">
                     <b-button
-                        label="Add album"
+                        label="Create album"
                         type="is-primary"
                         class="is-right"
                         icon-left="plus"
@@ -20,10 +20,32 @@
                 </div>
             </div>
             <!-- Display my albums -->
-            <div class="columns is-multiline">
+            <div v-show="myAlbums.length > 0" class="columns is-multiline">
                 <div v-for="n in 4" :key="n" class="column is-one-quarter">
                     <CardAlbum />
                 </div>
+            </div>
+            <!-- Display message when album is empty -->
+            <div v-show="myAlbums.length < 1">
+                <section class="hero is-medium">
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            <p class="subtitle">
+                                Nothing to see here, please add your own album
+                            </p>
+                            <div class="buttons is-centered">
+                                <b-button
+                                    label="Create album"
+                                    type="is-primary"
+                                    class="is-right"
+                                    icon-left="plus"
+                                    icon-pack="fa"
+                                    @click="openCreateModal"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             <!-- Column for title -->
             <div class="columns is-vcentered">
@@ -32,10 +54,24 @@
                 </div>
             </div>
             <!-- Display shared albums -->
-            <div class="columns is-multiline">
+            <div v-show="sharedAlbums.length > 0" class="columns is-multiline">
                 <div v-for="n in 3" :key="n" class="column is-one-quarter">
                     <CardAlbum />
                 </div>
+            </div>
+            <!-- Display message when sharedAlbum is empty -->
+            <div v-show="sharedAlbums.length < 1">
+                <section class="hero is-medium">
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            <p class="subtitle">Nothing to see here !</p>
+                            <p class="subtitle">
+                                Explain to your frinds that they can share an
+                                album with you
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
         <Footer />
@@ -73,5 +109,6 @@ export default {
             });
         },
     },
+    props: ["myAlbums", "sharedAlbums"],
 };
 </script>
