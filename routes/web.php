@@ -40,3 +40,5 @@ Route::get('/profil', [UserController::class, 'profil']);
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
 
 Route::get('/logout', [UserController::class, 'logout']);
+
+Route::get('/createAlbum', [AlbumController::class, 'create']);
