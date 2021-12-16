@@ -11,6 +11,9 @@ $body-background-color: #FAEEE0;
 // $scheme-invert: findColorInvert($scheme-main);
 $navbar-background-color: #7D5A5A;
 
+$dark: #311D3F;
+$danger-invert: findColorInvert($dark);
+
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
