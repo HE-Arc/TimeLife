@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 class AlbumController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
-        gallery($request, $id);
+        return Inertia::render('Album');
     }
 
     public function create(Request $request)
