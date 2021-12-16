@@ -7,7 +7,7 @@
         <!-- Column for title and add photos button -->
         <div class="columns is-vcentered">
             <div class="column">
-                <h1 class="title is-1">Vue Gallerie</h1>
+                <h1 class="title is-1">Gallery view</h1>
             </div>
             <div v-show="photos.length > 0" class="column is-narrow">
                 <a class="button is-primary is-right">
