@@ -48,20 +48,21 @@ export default {
     name: "CreateModal",
     data() {
         return {
-            allowCreation: false,
             form: {
                 albumName: this.albumName,
                 visibility: this.visibility
             }
         }
     },
+    computed: {
+        allowCreation: function() {
+            return (this.form.albumName && this.form.visibility);
+        }
+    },
     methods: {
         submit() {
             this.$inertia.post(route("albums.store"), this.form)
-        },
-        isCreationAllowed() {
-            this.allowCreation =  (this.form.albumName && this.form.visibility);
-        },
+        }
     }
 }
 </script>
