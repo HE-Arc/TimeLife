@@ -12,6 +12,7 @@ class Photo extends Model
     protected $fillable = [
         'id_album',
         'filename',
+        'name',
         'description',
         'latitude',
         'longitude',
