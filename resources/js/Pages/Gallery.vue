@@ -9,7 +9,7 @@
             <div class="column">
                 <h1 class="title is-1">Vue Gallerie</h1>
             </div>
-            <div v-show="photos.length > 0" class="column is-narrow ">
+            <div v-show="photos.length > 0" class="column is-narrow">
                 <a class="button is-primary is-right">
                     <strong>Add Photos</strong>
                 </a>
@@ -18,7 +18,7 @@
         
         <!-- Display pictures -->
         <div v-show="photos.length > 0" class="columns is-multiline">
-            <div v-for="n in 10" :key="n" class="column  is-one-quarter">
+            <div v-for="n in 10" :key="n" class="column is-one-quarter">
                 <CardPicture />
             </div>
         </div>
