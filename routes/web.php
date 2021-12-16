@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AlbumController;
 
 /*
@@ -18,13 +19,13 @@ use App\Http\Controllers\AlbumController;
 */
 
 
-
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'user' => Auth::user(),
     ]);
 });
 
@@ -34,4 +35,8 @@ Route::resource('/users', UserController::class);
 
 Route::get('/login', [UserController::class, 'login']);
 
+Route::get('/profil', [UserController::class, 'profil']);
+
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
+
+Route::get('/logout', [UserController::class, 'logout']);
