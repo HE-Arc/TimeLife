@@ -17,7 +17,12 @@ import Menu from '../Component/Menu.vue';
 import Footer from '../Component/Footer.vue';
 
 export default {
-
+    components: {
+        Link,
+        Head,
+        Menu,
+        Footer
+    },
   computed: {
     user() {
       return this.$page.props.user
