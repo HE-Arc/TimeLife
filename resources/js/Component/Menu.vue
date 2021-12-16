@@ -18,18 +18,18 @@
         </template>
 
         <template #end>
-            <b-navbar-item tag="div" >
-                <div v-if="user">
-                    <div>
-                        Bonjour {{ user.first_name }}
-                    </div>
-                    <div class="buttons">
-                        <a class="button is-primary" href="/logout">
-                            <strong>Log out</strong>
-                        </a>
-                    </div>
+            <b-navbar-item tag="div" v-if="user">
+                Bonjour {{ user.first_name }}
+            </b-navbar-item>
+            <b-navbar-item tag="div" v-if="user">
+                <div class="buttons">
+                    <a class="button is-primary" href="/logout">
+                        <strong>Log out</strong>
+                    </a>
                 </div>
-                <div class="buttons" v-else>
+            </b-navbar-item>
+            <b-navbar-item tag="div" v-else>
+                <div class="buttons">
                     <a class="button is-primary" href="/users">
                         <strong>Sign up</strong>
                     </a>
