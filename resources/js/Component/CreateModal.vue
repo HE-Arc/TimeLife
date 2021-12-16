@@ -5,14 +5,13 @@
             <section class="modal-card-body">
                 
                 <b-field label="Album name">
-                    <b-input v-model="form.albumName" placeholder="Album name" type="text" @input="isCreationAllowed" required></b-input>
+                    <b-input v-model="form.albumName" placeholder="Album name" type="text" required></b-input>
                 </b-field>
                 
                 <b-field>
-                    <b-radio-button v-model="form.visibility"
-                        native-value="Private"
-                        type="is-primary is-light is-outlined"
-                        @input="isCreationAllowed">
+                    <b-radio-button v-model="form.isPrivate"
+                        native-value="true"
+                        type="is-primary is-light is-outlined">
                         <b-icon icon="lock" pack="fa"></b-icon>
                         <span>Private</span>
                     </b-radio-button>
