@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/users', [UserController::class, 'index']);
+Route::resource('/users', UserController::class);
 
 Route::get('/login', [UserController::class, 'login']);
 

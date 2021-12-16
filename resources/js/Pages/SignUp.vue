@@ -79,7 +79,7 @@ export default {
     methods: {
         create()
         {
-            this.form.post('/users')
+            this.form.post(route('users.store'))
         }
     }
 };
