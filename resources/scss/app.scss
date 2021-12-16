@@ -17,6 +17,9 @@ $dark:#311D3F;
 $dark-invert:findColorInvert($dark);
 
 
+$dark: #311D3F;
+$danger-invert: findColorInvert($dark);
+
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
