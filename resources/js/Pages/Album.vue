@@ -19,10 +19,22 @@
                     />
                 </div>
             </div>
+            <!-- Display my albums -->
+            <div class="columns is-multiline">
+                <div v-for="n in 4" :key="n" class="column is-one-quarter">
+                    <CardAlbum />
+                </div>
+            </div>
             <!-- Column for title -->
             <div class="columns is-vcentered">
                 <div class="column">
                     <h1 class="title is-2">Shared Albums</h1>
+                </div>
+            </div>
+            <!-- Display shared albums -->
+            <div class="columns is-multiline">
+                <div v-for="n in 3" :key="n" class="column is-one-quarter">
+                    <CardAlbum />
                 </div>
             </div>
         </section>
@@ -37,6 +49,7 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
 import Menu from "../Component/Menu.vue";
+import CardAlbum from "../Component/CardAlbum";
 import Footer from "../Component/Footer.vue";
 import CreateModal from "../Component/CreateModal";
 
@@ -47,6 +60,7 @@ export default {
         Head,
         Menu,
         Footer,
+        CardAlbum,
     },
     methods: {
         openCreateModal() {
