@@ -31,7 +31,8 @@
                     <div class="hero-body">
                         <div class="container has-text-centered">
                             <p class="subtitle">
-                                Nothing to see here, please add your own album
+                                Nothing to see here, please create your own
+                                album
                             </p>
                             <div class="buttons is-centered">
                                 <b-button
