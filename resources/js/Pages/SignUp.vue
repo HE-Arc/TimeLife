@@ -3,6 +3,12 @@
     <Menu />
     <Head title="Sign up" />
     <section>
+        <b-message
+                    title="ERROR"
+                    type="is-danger"
+                    aria-close-label="Close message" v-if="error">
+                        {{ error }}
+        </b-message>
         <div class="box">
             <form action="/users" method="POST" @submit.prevent="create">
                 <div class="container">
@@ -58,6 +64,9 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default {
     name: "SignUp",
+    props: {
+        error: String,
+    },
     data(){
         return {
             form: this.$inertia.form({

@@ -28,11 +28,18 @@ class UserController extends Controller
             'description' => '',
         ]);
 
-        User::create($request->all());
+        if(User::where(['email' => $request['email']])->first() != null)
+        {
+            return Inertia::render('SignUp', [
+                'error' => "Email existing",
+            ]);
+        }
+        else{
+            User::create($request->all());
 
+            return redirect('/success');
+        }
 
-        // TODO a message for success create user
-        return Inertia::location("/");
     }
 
     public function profil()
@@ -61,8 +68,8 @@ class UserController extends Controller
         else
         {
             // TODO a message for error login
-            return back()->withErrors([
-                'email' => "ERROR",
+            return Inertia::render('Login', [
+                'error' => "Mail or Password invalid"
             ]);
         }
     }
@@ -72,7 +79,7 @@ class UserController extends Controller
     public function login()
     {
         return Inertia::render('Login', [
-
+            'error' => null,
         ]);
     }
 

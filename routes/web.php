@@ -39,4 +39,8 @@ Route::get('/profil', [UserController::class, 'profil']);
 
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
 
+Route::get('/success', function() {
+    return Inertia::render('Success');
+});
+
 Route::get('/logout', [UserController::class, 'logout']);

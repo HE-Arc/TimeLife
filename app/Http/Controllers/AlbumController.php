@@ -12,7 +12,7 @@ class AlbumController extends Controller
 {
     public function index(Request $request, $id)
     {
-        gallery($request, $id);
+        $this->gallery($request, $id);
     }
 
     public function gallery(Request $request, $id)
@@ -25,15 +25,4 @@ class AlbumController extends Controller
             "photos"=>$photos,
         ]);
     }
-
-    public function map(Request $request)
-    {
-        gallery();
-    }
-
-    public function timeline(Request $request)
-    {
-        gallery();
-    }
-
 }

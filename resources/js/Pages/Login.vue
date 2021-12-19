@@ -3,6 +3,12 @@
     <Head title="Login" />
     <Menu />
     <section>
+        <b-message
+                    title="ERROR"
+                    type="is-danger"
+                    aria-close-label="Close message" v-if="error">
+                        {{ error }}
+        </b-message>
         <div class="box">
             <form action="/loginCheck" method="POST" @submit.prevent="login">
                 <div class="container">
@@ -18,7 +24,6 @@
                     <div class="buttons">
                         <button type="submit" class="button is-primary"><strong>Login</strong></button>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -43,6 +48,9 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default {
     name: "login",
+    props:  {
+        error: String,
+    },
     data(){
         return {
             form: this.$inertia.form({
@@ -62,6 +70,7 @@ export default {
         login()
         {
             this.form.post('/loginCheck')
+            this.form.reset()
         }
     }
 };
