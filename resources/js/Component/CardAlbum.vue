@@ -1,11 +1,9 @@
 <template>
     <section>
-        <div class="card">
-            <div class="box is-dark">
-                <div class="container has-text-centered is-dark">
-                    <p class="title is-4">Vacances a Rome</p>
-                    <p class="subtitle is-6">Bedric Sila</p>
-                </div>
+        <div class="box is-dark">
+            <div class="container has-text-centered is-dark">
+                <p class="title is-4">Vacances a Rome</p>
+                <p class="subtitle is-6">Bedric Sila</p>
             </div>
         </div>
     </section>
@@ -22,9 +20,6 @@
 .container {
     padding-top: 75px;
     padding-bottom: 75px;
-}
-.card-content {
-    padding: 1rem;
 }
 </style>
 
