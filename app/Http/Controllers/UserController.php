@@ -35,9 +35,9 @@ class UserController extends Controller
         return Inertia::location("/");
     }
 
-    public function profil()
+    public function profile()
     {
-        return Inertia::render('Profil', [
+        return Inertia::render('Profile', [
 
         ]);
     }
@@ -56,7 +56,7 @@ class UserController extends Controller
         {
             Auth::login($user);
 
-            return redirect()->intended('/profil');
+            return redirect()->intended('/profile');
         }
         else
         {
