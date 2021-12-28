@@ -22,7 +22,8 @@ class AlbumController extends Controller
             ->get();
         //dd($photos);
         return Inertia::render('Gallery', [
-            "photos"=>$photos,
+            "photos" => $photos,
+            "galleryId" => $id
         ]);
     }
 

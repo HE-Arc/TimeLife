@@ -49,6 +49,7 @@
 
 export default {
     name: "UploadModal",
+    props:['galleryId'],
     data() {
         return {
             dropFiles: [],
@@ -62,7 +63,7 @@ export default {
     },
     methods: {
         submit() {
-            this.form.post(route("photos.store",1));
+            this.form.post(route("photos.store", this.galleryId));
         },
         deleteDropFile(index) {
             this.form.clearErrors();
