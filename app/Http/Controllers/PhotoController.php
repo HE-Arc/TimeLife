@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -38,9 +39,9 @@ class PhotoController extends Controller
                 "filename" => $savedPath,
                 "latitude" => "",
                 "longitude" => "",
-                "date_p" => new \DateTime("@0"), // 1 January 1970
-                "created_at" => new \DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
-                "updated_at" => new \DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
+                "date_p" => new DateTime("@0"), // 1 January 1970
+                "created_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
+                "updated_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
             ]);
         }
 
