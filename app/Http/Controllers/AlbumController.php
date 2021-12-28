@@ -10,9 +10,18 @@ use Illuminate\Http\Request;
 
 class AlbumController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
-        gallery($request, $id);
+        // Should be replaced by the user id of the logged user
+        $myAlbums = Album::where('id_user', '=', 1)->get();
+
+        // Should find a command to get list of sharedAlbuns
+        $sharedAlbums = Album::where('id_user', '=', 1)->get();
+
+        return Inertia::render('Album', [
+            "myAlbums"=>$myAlbums,
+            "sharedAlbums"=>$sharedAlbums,
+        ]);
     }
 
     public function create(Request $request)

@@ -35,6 +35,8 @@ Route::get('/', function () {
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
 
+Route::get('/album', [AlbumController::class, 'index']);
+
 Route::resource('/users', UserController::class);
 
 Route::get('/login', [UserController::class, 'login']);
