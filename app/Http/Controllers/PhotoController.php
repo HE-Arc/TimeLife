@@ -13,12 +13,13 @@ class PhotoController extends Controller
         return Inertia::render('Upload');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
         return response()->json(["error" => "test"]);
 
         $request->validate([
-            "images" => "required|image|mimes:jpg,png,jpeg|max:3000"
+            "images" => "required",
+            "images.*" => "image|mimes:jpg,png,jpeg|max:10"
         ]);
 
         return response()->json(["error" => "tes2"]);
