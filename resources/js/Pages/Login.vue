@@ -6,8 +6,8 @@
         <b-message
                     title="ERROR"
                     type="is-danger"
-                    aria-close-label="Close message" v-if="error">
-                        {{ error }}
+                    aria-close-label="Close message" v-if="$page.props.flash.error">
+                        {{ $page.props.flash.error }}
         </b-message>
         <div class="box">
             <form action="/loginCheck" method="POST" @submit.prevent="login">
@@ -48,9 +48,6 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default {
     name: "login",
-    props:  {
-        error: String,
-    },
     data(){
         return {
             form: this.$inertia.form({

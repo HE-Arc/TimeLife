@@ -18,22 +18,22 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
-
-Route::get('/', function () {
+Route::get('/', function ($success=false) {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'user' => Auth::user(),
+        'success' => $success,
     ]);
-});
+})->name('home');
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
 
 Route::resource('/users', UserController::class);
 
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profil', [UserController::class, 'profil']);
 

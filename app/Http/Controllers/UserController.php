@@ -37,7 +37,7 @@ class UserController extends Controller
         else{
             User::create($request->all());
 
-            return redirect('/success');
+            return redirect()->route('home', ['success' => true]);
         }
 
     }
@@ -68,9 +68,10 @@ class UserController extends Controller
         else
         {
             // TODO a message for error login
-            return Inertia::render('Login', [
+            return redirect()->back()->with('error','Mail or Password invalid');
+            /*return Inertia::render('Login', [
                 'error' => "Mail or Password invalid"
-            ]);
+            ]);*/
         }
     }
 
@@ -78,9 +79,7 @@ class UserController extends Controller
 
     public function login()
     {
-        return Inertia::render('Login', [
-            'error' => null,
-        ]);
+        return Inertia::render('Login');
     }
 
     public function logout()
@@ -95,3 +94,5 @@ Inertia::share('user', fn (Request $request) => $request->user()
         ? $request->user()->only('last_name', 'first_name')
         : null
 );
+
+
