@@ -3,6 +3,13 @@
     <div class="modal-card" style="width: auto">
         <form @submit.prevent="submit">
             <section class="modal-card-body">
+                <b-message type="is-danger" v-show="form.hasErrors">
+                    <ul>
+                        <li v-for="(msg, file) in form.errors">
+                            {{ msg.replace("The " + file, form.images[Number(file.split('.')[1])].name) }}
+                        </li>
+                    </ul>
+                </b-message>
                 <b-field>
                     <b-upload v-model="form.images" multiple drag-drop :accept="acceptFiles" @input="isUploadAllowed" expanded>
                         <section class="section">
@@ -55,9 +62,10 @@ export default {
     },
     methods: {
         submit() {
-            this.$inertia.post(route("photos.store"), this.form)
+            this.form.post(route("photos.store",1));
         },
         deleteDropFile(index) {
+            this.form.clearErrors();
             this.form.images.splice(index, 1)
             this.isUploadAllowed();
         },
