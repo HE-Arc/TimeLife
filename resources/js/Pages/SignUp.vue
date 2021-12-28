@@ -4,9 +4,8 @@
     <Head title="Sign up" />
     <section>
         <b-message
-                    title="ERROR"
                     type="is-danger"
-                    aria-close-label="Close message" v-if="form.errors.email">
+                    v-if="form.errors.email">
                         {{ form.errors.email }}
         </b-message>
         <div class="box">

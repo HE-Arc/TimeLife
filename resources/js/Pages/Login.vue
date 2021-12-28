@@ -4,9 +4,8 @@
     <Menu />
     <section>
         <b-message
-                    title="ERROR"
                     type="is-danger"
-                    aria-close-label="Close message" v-if="$page.props.flash.error">
+                    v-if="$page.props.flash.error">
                         {{ $page.props.flash.error }}
         </b-message>
         <div class="box">
