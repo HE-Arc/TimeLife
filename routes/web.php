@@ -18,14 +18,13 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
-Route::get('/', function ($success=false) {
+Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'user' => Auth::user(),
-        'success' => $success,
+        'user' => Auth::user()
     ]);
 })->name('home');
 

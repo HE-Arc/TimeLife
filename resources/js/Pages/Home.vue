@@ -2,7 +2,15 @@
     <div>
     <Menu />
     <Head title="Home" />
+
     <section class="hero is-dark is-fullheight-with-navbar">
+        <b-message
+            title="User created"
+            type="is-success"
+            v-if="$page.props.flash.success"
+            >
+                {{ $page.props.flash.success }}
+        </b-message>
         <div class="hero-body">
             <div class="container has-text-centered">
                 <img src="/img/logo_tmp.png">
@@ -51,7 +59,7 @@ export default {
         canRegister: Boolean,
         laravelVersion: String,
         phpVersion: String,
-        user: Object,
+        user: Object
     }
 };
 </script>

@@ -23,22 +23,14 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required',
             'description' => '',
         ]);
 
-        if(User::where(['email' => $request['email']])->first() != null)
-        {
-            return Inertia::render('SignUp', [
-                'error' => "Email existing",
-            ]);
-        }
-        else{
-            User::create($request->all());
+        User::create($request->all());
 
-            return redirect()->route('home', ['success' => true]);
-        }
+        return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');
 
     }
 
