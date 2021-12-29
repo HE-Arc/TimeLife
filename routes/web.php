@@ -41,7 +41,7 @@ Route::resource('/users', UserController::class);
 
 Route::get('/login', [UserController::class, 'login']);
 
-Route::get('/profile', [UserController::class, 'profile']);
+Route::get('/profile/{id}', [UserController::class, 'profile']);
 
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
 
