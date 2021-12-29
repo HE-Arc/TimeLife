@@ -8,20 +8,24 @@
                     <div class="container">
                         <img src="http://placekitten.com/g/200/200" />
                         <div>
-                            <h2 class="title is-2">Prenom nom</h2>
-                            <h4 class="title is-4">email@email.com</h4>
+                            <h2 class="title is-2">
+                                {{
+                                    publicUser.first_name +
+                                    " " +
+                                    publicUser.last_name
+                                }}
+                            </h2>
+                            <h4 class="title is-4">{{ publicUser.email }}</h4>
                         </div>
                     </div>
-                    <div class="box">
-                        This is a sample of a description. <br />
-                        Please insert here what you want
-                    </div>
+                    <!-- Please do not indent in another way-->
+                    <div class="box">{{ publicUser.description }}</div>
                 </div>
 
                 <div class="column">
                     <h2 class="title is-2">Public Albums :</h2>
                     <div
-                        v-show="publicAlbums.length == 0"
+                        v-show="publicAlbums.length > 0"
                         class="columns is-multiline"
                     >
                         <div v-for="n in 4" :key="n" class="column is-half">
@@ -51,6 +55,7 @@ img {
 
 .box {
     margin-top: 1rem;
+    white-space: pre-wrap;
 }
 </style>
 <script>
@@ -67,6 +72,6 @@ export default {
         Footer,
         CardAlbum,
     },
-    props: ["publicAlbums"],
+    props: ["publicUser", "publicAlbums"],
 };
 </script>

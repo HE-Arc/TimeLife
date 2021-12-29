@@ -39,9 +39,11 @@ class UserController extends Controller
 
     public function profile($id)
     {
+        $publicUser = User::where('id', '=', $id)->first();
         $publicAlbums = Album::where('id_user', '=', $id)->get();
 
         return Inertia::render('Profile', [
+            "publicUser" => $publicUser,
             "publicAlbums" => $publicAlbums,
 
         ]);
