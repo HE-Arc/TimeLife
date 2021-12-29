@@ -6,12 +6,16 @@ use App\Models\Album;
 use App\Models\Photo;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 
 class AlbumController extends Controller
 {
     public function index(Request $request)
     {
+
         // Should be replaced by the user id of the logged user
         $myAlbums = Album::where('id_user', '=', 1)->get();
 
@@ -21,6 +25,7 @@ class AlbumController extends Controller
         return Inertia::render('Album', [
             "myAlbums"=>$myAlbums,
             "sharedAlbums"=>$sharedAlbums,
+            'user' => Auth::user(),
         ]);
     }
 
@@ -37,6 +42,7 @@ class AlbumController extends Controller
         //dd($photos);
         return Inertia::render('Gallery', [
             "photos"=>$photos,
+            'user' => Auth::user(),
         ]);
     }
 
