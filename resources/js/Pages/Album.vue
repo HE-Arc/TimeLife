@@ -22,7 +22,11 @@
             <!-- Display my albums -->
             <div v-show="myAlbums.length > 0" class="columns is-multiline">
                 <div v-for="n in 4" :key="n" class="column is-one-quarter">
-                    <CardAlbum />
+                    <CardAlbum
+                        title="Vacances a Rome"
+                        username="Bedric Sila"
+                        thumbnail="https://picsum.photos/600/400"
+                    />
                 </div>
             </div>
             <!-- Display message when album is empty -->
@@ -57,7 +61,11 @@
             <!-- Display shared albums -->
             <div v-show="sharedAlbums.length > 0" class="columns is-multiline">
                 <div v-for="n in 3" :key="n" class="column is-one-quarter">
-                    <CardAlbum />
+                    <CardAlbum
+                        title="Vacances a Rome"
+                        username="Bedric Sila"
+                        thumbnail="https://picsum.photos/600/400"
+                    />
                 </div>
             </div>
             <!-- Display message when sharedAlbum is empty -->
