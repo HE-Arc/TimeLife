@@ -45,7 +45,7 @@ class UserController extends Controller
         return Inertia::render('Profile', [
             "publicUser" => $publicUser,
             "publicAlbums" => $publicAlbums,
-
+            'user' => Auth::user(),
         ]);
     }
 

@@ -35,13 +35,13 @@ Route::get('/', function () {
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
 
-Route::get('/album', [AlbumController::class, 'index']);
+Route::get('/album', [AlbumController::class, 'index'])->name('album');;
 
 Route::resource('/users', UserController::class);
 
 Route::get('/login', [UserController::class, 'login']);
 
-Route::get('/profile/{id}', [UserController::class, 'profile']);
+Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
 Route::post('/loginCheck', [UserController::class, 'loginPost']);
 
