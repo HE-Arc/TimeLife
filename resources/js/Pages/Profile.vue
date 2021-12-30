@@ -60,6 +60,7 @@ img {
 .box {
     margin-top: 1rem;
     white-space: pre-wrap;
+    box-shadow: none;
 }
 </style>
 <script>
