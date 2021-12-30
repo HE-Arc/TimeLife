@@ -28,6 +28,9 @@ class UserController extends Controller
             'description' => '',
         ]);
 
+        if($request['description'] == null)
+            $request['description'] = " ";
+
         User::create($request->all());
 
         return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');

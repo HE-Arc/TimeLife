@@ -20,13 +20,12 @@
                     </b-field>
 
                     <b-field label="Email">
-                        <b-input id="email" v-model="form.email" type="email"
-                            maxlength="30">
+                        <b-input id="email" v-model="form.email" type="email">
                         </b-input>
                     </b-field>
 
                     <b-field label="Password">
-                        <b-input id="password" v-model="form.password" type="password" maxlength="30"></b-input>
+                        <b-input id="password" v-model="form.password" type="password" ></b-input>
                     </b-field>
 
                     <b-field label="Description">
