@@ -67,7 +67,7 @@ export default {
         login()
         {
             this.form.post('/loginCheck')
-            this.form.reset()
+            this.form.reset('password')
         }
     }
 };
