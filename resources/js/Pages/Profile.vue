@@ -29,7 +29,11 @@
                         class="columns is-multiline"
                     >
                         <div v-for="n in 4" :key="n" class="column is-half">
-                            <CardAlbum />
+                            <CardAlbum
+                                title="Vacances a Rome"
+                                username="Bedric Sila"
+                                thumbnail="https://picsum.photos/600/400"
+                            />
                         </div>
                     </div>
                 </div>
