@@ -2,9 +2,9 @@
     <div>
     <Menu />
     <Head title="Home" />
-
     <section class="hero is-dark is-fullheight-with-navbar">
         <b-message
+            class="message"
             title="User created"
             type="is-success"
             v-if="$page.props.flash.success"
@@ -38,6 +38,13 @@
         img {
             width: 300px;
         }
+    }
+    .message{
+        position: absolute;
+        width: 40vw;
+        top: 50px;
+        left: 33%;
+        // transform: translate(-50%, -50%);
     }
 </style>
 <script>

@@ -7,6 +7,7 @@
                     type="is-danger"
                     v-if="$page.props.flash.error">
                         {{ $page.props.flash.error }}
+
         </b-message>
         <div class="box">
             <form action="/loginCheck" method="POST" @submit.prevent="login">
