@@ -30,7 +30,7 @@ class PhotoController extends Controller
         foreach($files as $file) {
             $savedPath = $file->store("{$id}", 'album_data');
 
-            // TODO: EXIF DATA EXTRACTION
+            // EXIF DATA EXTRACTION
             $exif = exif_read_data($file);
             if (array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
                 $latitude = $this->gps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
