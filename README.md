@@ -26,6 +26,8 @@ cp .env.example .env
 COMPOSE_PROJECT_NAME=timelife
 PHP_VERSION=7.4
 ...
+PHP_FPM_INSTALL_EXIF=true
+...
 MYSQL_DATABASE=timelife
 MYSQL_USER=homestead
 MYSQL_PASSWORD=secret
