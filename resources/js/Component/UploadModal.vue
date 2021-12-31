@@ -3,8 +3,15 @@
     <div class="modal-card" style="width: auto">
         <form @submit.prevent="submit">
             <section class="modal-card-body">
+                <b-message type="is-danger" v-show="form.hasErrors">
+                    <ul>
+                        <li v-for="(msg, file) in form.errors">
+                            {{ msg.replace("The " + file, form.images[Number(file.split('.')[1])].name) }}
+                        </li>
+                    </ul>
+                </b-message>
                 <b-field>
-                    <b-upload v-model="dropFiles" multiple drag-drop :accept="acceptFiles" @input="isUploadAllowed" expanded>
+                    <b-upload v-model="form.images" multiple drag-drop :accept="acceptFiles" @input="isUploadAllowed" expanded>
                         <section class="section">
                             <div class="content has-text-centered">
                                 <p>
@@ -18,7 +25,7 @@
                 </b-field>
 
                 <b-field grouped group-multiline>
-                    <div class="control" v-for="(file, index) in dropFiles" :key="index" >
+                    <div class="control" v-for="(file, index) in form.images" :key="index" >
                         <b-taglist attached closable>
                             <b-tag type="is-primary">
                                 {{file.name}}
@@ -42,34 +49,36 @@
 
 export default {
     name: "UploadModal",
+    props:['galleryId'],
     data() {
         return {
             dropFiles: [],
             acceptFiles: ".png, .jpg, .jpeg",
             maxFileSizeInKb: 3000,
             allowUpload:false,
-            form: {
-                images: this.dropFiles,
-            }
+            form: this.$inertia.form({
+                images: [],
+            }),
         }
     },
     methods: {
         submit() {
-            this.$inertia.post(route("photos.store"), this.form)
+            this.form.post(route("photos.store", this.galleryId));
         },
         deleteDropFile(index) {
-            this.dropFiles.splice(index, 1)
+            this.form.clearErrors();
+            this.form.images.splice(index, 1)
             this.isUploadAllowed();
         },
         isUploadAllowed() {
             this.allowUpload = this.checkFileSize()
         },
         checkFileSize() {
-            if (this.dropFiles.length === 0)
+            if (this.form.images.length === 0)
                 return false;
 
-            for(let index in this.dropFiles) {
-                if (this.dropFiles[index].size/1000 > this.maxFileSizeInKb)
+            for(let index in this.form.images) {
+                if (this.form.images[index].size/1000 > this.maxFileSizeInKb)
                     return false;
             }
             return true;
