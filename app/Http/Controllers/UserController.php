@@ -23,12 +23,12 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
-            'description' => '',
+            'description' => 'nullable',
         ]);
 
-        if($request['description'] == null)
+        if($request['description'] === null)
             $request['description'] = " ";
 
         User::create($request->all());

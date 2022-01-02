@@ -2,8 +2,7 @@
     <div>
     <Menu />
     <Head title="Home" />
-    <section class="hero is-dark is-fullheight-with-navbar">
-        <b-message
+    <b-message
             class="message"
             title="User created"
             type="is-success"
@@ -11,6 +10,8 @@
             >
                 {{ $page.props.flash.success }}
         </b-message>
+    <section class="hero is-dark is-fullheight-with-navbar">
+
         <div class="hero-body">
             <div class="container has-text-centered">
                 <img src="/img/logo_tmp.png">
@@ -42,9 +43,9 @@
     .message{
         position: absolute;
         width: 40vw;
-        top: 50px;
+        top: 10vh;
         left: 33%;
-        // transform: translate(-50%, -50%);
+        z-index: 120;
     }
 </style>
 <script>
