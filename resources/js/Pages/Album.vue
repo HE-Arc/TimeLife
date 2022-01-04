@@ -75,7 +75,7 @@
                         <div class="container has-text-centered">
                             <p class="subtitle">Nothing to see here !</p>
                             <p class="subtitle">
-                                Explain to your frinds that they can share an
+                                Explain to your friends that they can share an
                                 album with you
                             </p>
                         </div>
