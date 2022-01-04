@@ -61,6 +61,7 @@ img {
     margin-top: 1rem;
     white-space: pre-wrap;
     box-shadow: none;
+    border: 1px solid rgba(0,0,0,.15);
 }
 </style>
 <script>
