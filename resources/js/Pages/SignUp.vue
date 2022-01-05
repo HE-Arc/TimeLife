@@ -3,25 +3,31 @@
     <Menu />
     <Head title="Sign up" />
     <section>
+        <b-message type="is-danger" v-show="form.hasErrors">
+            <ul >
+                <li v-for="msg in form.errors" :key="msg">
+                    {{ msg }}
+                </li>
+            </ul>
+        </b-message>
         <div class="box">
-            <form action="/users" method="POST" @submit.prevent="create">
+            <form  @submit.prevent="create">
                 <div class="container">
                     <b-field label="Lastname">
-                        <b-input id="last_name" v-model="form.last_name"></b-input>
+                        <b-input id="last_name" required v-model="form.last_name"></b-input>
                     </b-field>
 
                     <b-field label="Firstname">
-                        <b-input id="first_name" v-model="form.first_name"></b-input>
+                        <b-input id="first_name" required v-model="form.first_name"></b-input>
                     </b-field>
 
                     <b-field label="Email">
-                        <b-input id="email" v-model="form.email" type="email"
-                            maxlength="30">
+                        <b-input id="email" required v-model="form.email" type="email">
                         </b-input>
                     </b-field>
 
                     <b-field label="Password">
-                        <b-input id="password" v-model="form.password" type="password" maxlength="30"></b-input>
+                        <b-input id="password" required v-model="form.password" type="password" ></b-input>
                     </b-field>
 
                     <b-field label="Description">
@@ -58,6 +64,9 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default {
     name: "SignUp",
+    props: {
+        error: String,
+    },
     data(){
         return {
             form: this.$inertia.form({

@@ -7,7 +7,7 @@ use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
-    /**
+     /**
      * The root template that's loaded on the first page visit.
      *
      * @see https://inertiajs.com/server-side-setup#root-template
@@ -37,7 +37,12 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            //
+            'flash' => function() use ($request){
+                return [
+                    'error' => $request->session()->get('error'),
+                    'success' => $request->session()->get('success'),
+                ];
+            },
         ]);
     }
 }

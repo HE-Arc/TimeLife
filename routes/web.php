@@ -19,16 +19,15 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
-
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'user' => Auth::user(),
+        'user' => Auth::user()
     ]);
-});
+})->name('home');
 
 
 
@@ -40,11 +39,11 @@ Route::get('/album', [AlbumController::class, 'index']);
 Route::resource('/users', UserController::class);
 Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
 
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profil', [UserController::class, 'profil']);
 
-Route::post('/loginCheck', [UserController::class, 'loginPost']);
+Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
 Route::get('/logout', [UserController::class, 'logout']);
 

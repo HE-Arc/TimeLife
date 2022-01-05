@@ -23,16 +23,18 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
-            'description' => '',
+            'description' => 'nullable',
         ]);
+
+        if($request['description'] === null)
+            $request['description'] = " ";
 
         User::create($request->all());
 
+        return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');
 
-        // TODO a message for success create user
-        return Inertia::location("/");
     }
 
     public function profil()
@@ -42,7 +44,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function loginPost(Request $request)
+    public function loginCheck(Request $request)
     {
 
         $request->validate([
@@ -61,9 +63,10 @@ class UserController extends Controller
         else
         {
             // TODO a message for error login
-            return back()->withErrors([
-                'email' => "ERROR",
-            ]);
+            return redirect()->back()->with('error','Mail or Password invalid');
+            /*return Inertia::render('Login', [
+                'error' => "Mail or Password invalid"
+            ]);*/
         }
     }
 
@@ -71,9 +74,7 @@ class UserController extends Controller
 
     public function login()
     {
-        return Inertia::render('Login', [
-
-        ]);
+        return Inertia::render('Login');
     }
 
     public function logout()
@@ -88,3 +89,5 @@ Inertia::share('user', fn (Request $request) => $request->user()
         ? $request->user()->only('last_name', 'first_name')
         : null
 );
+
+

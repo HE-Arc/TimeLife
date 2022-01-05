@@ -3,22 +3,27 @@
     <Head title="Login" />
     <Menu />
     <section>
+        <b-message
+                    type="is-danger"
+                    v-if="$page.props.flash.error">
+                        {{ $page.props.flash.error }}
+
+        </b-message>
         <div class="box">
-            <form action="/loginCheck" method="POST" @submit.prevent="login">
+            <form @submit.prevent="login">
                 <div class="container">
 
                     <b-field label="Email">
-                        <b-input id="email" v-model="form.email" type="email"></b-input>
+                        <b-input id="email" required v-model="form.email" type="email"></b-input>
                     </b-field>
 
                     <b-field label="Password">
-                        <b-input id="password" v-model="form.password" type="password" ></b-input>
+                        <b-input id="password" required v-model="form.password" type="password" ></b-input>
                     </b-field>
 
                     <div class="buttons">
                         <button type="submit" class="button is-primary"><strong>Login</strong></button>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -61,7 +66,8 @@ export default {
     methods: {
         login()
         {
-            this.form.post('/loginCheck')
+            this.form.post(route('loginCheck'))
+            this.form.reset('password')
         }
     }
 };
