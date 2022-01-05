@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,15 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery']);
+
+
+
+Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
+
+Route::get('/album', [AlbumController::class, 'index']);
 
 Route::resource('/users', UserController::class);
+Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
@@ -39,3 +46,5 @@ Route::get('/profil', [UserController::class, 'profil']);
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
 Route::get('/logout', [UserController::class, 'logout']);
+
+Route::get('/createAlbum', [AlbumController::class, 'create']);
