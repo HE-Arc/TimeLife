@@ -14,7 +14,7 @@
                 <div class="container">
 
                     <b-field label="Email">
-                        <b-input id="email" v-model="form.email" type="email"></b-input>
+                        <b-input id="email" required v-model="form.email" type="email"></b-input>
                     </b-field>
 
                     <b-field label="Password">

@@ -14,15 +14,15 @@
             <form  @submit.prevent="create">
                 <div class="container">
                     <b-field label="Lastname">
-                        <b-input id="last_name" v-model="form.last_name"></b-input>
+                        <b-input id="last_name" required v-model="form.last_name"></b-input>
                     </b-field>
 
                     <b-field label="Firstname">
-                        <b-input id="first_name" v-model="form.first_name"></b-input>
+                        <b-input id="first_name" required v-model="form.first_name"></b-input>
                     </b-field>
 
                     <b-field label="Email">
-                        <b-input id="email" v-model="form.email" type="email">
+                        <b-input id="email" required v-model="form.email" type="email">
                         </b-input>
                     </b-field>
 
