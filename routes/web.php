@@ -36,10 +36,6 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profil', [UserController::class, 'profil']);
 
-Route::post('/loginCheck', [UserController::class, 'loginPost']);
-
-Route::get('/success', function() {
-    return Inertia::render('Success');
-});
+Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
 Route::get('/logout', [UserController::class, 'logout']);

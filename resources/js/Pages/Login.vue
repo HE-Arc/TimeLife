@@ -10,7 +10,7 @@
 
         </b-message>
         <div class="box">
-            <form action="/loginCheck" method="POST" @submit.prevent="login">
+            <form @submit.prevent="login">
                 <div class="container">
 
                     <b-field label="Email">
@@ -18,7 +18,7 @@
                     </b-field>
 
                     <b-field label="Password">
-                        <b-input id="password" v-model="form.password" type="password" ></b-input>
+                        <b-input id="password" required v-model="form.password" type="password" ></b-input>
                     </b-field>
 
                     <div class="buttons">
@@ -66,7 +66,7 @@ export default {
     methods: {
         login()
         {
-            this.form.post('/loginCheck')
+            this.form.post('loginCheck')
             this.form.reset('password')
         }
     }

@@ -44,7 +44,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function loginPost(Request $request)
+    public function loginCheck(Request $request)
     {
 
         $request->validate([

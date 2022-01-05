@@ -3,13 +3,15 @@
     <Menu />
     <Head title="Sign up" />
     <section>
-        <b-message
-                    type="is-danger"
-                    v-if="form.errors.email">
-                        {{ form.errors.email }}
+        <b-message type="is-danger" v-show="form.hasErrors">
+            <ul >
+                <li v-for="msg in form.errors" :key="msg">
+                    {{ msg }}
+                </li>
+            </ul>
         </b-message>
         <div class="box">
-            <form action="/users" method="POST" @submit.prevent="create">
+            <form  @submit.prevent="create">
                 <div class="container">
                     <b-field label="Lastname">
                         <b-input id="last_name" v-model="form.last_name"></b-input>
@@ -25,7 +27,7 @@
                     </b-field>
 
                     <b-field label="Password">
-                        <b-input id="password" v-model="form.password" type="password" ></b-input>
+                        <b-input id="password" required v-model="form.password" type="password" ></b-input>
                     </b-field>
 
                     <b-field label="Description">
