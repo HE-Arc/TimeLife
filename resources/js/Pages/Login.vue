@@ -66,7 +66,7 @@ export default {
     methods: {
         login()
         {
-            this.form.post('loginCheck')
+            this.form.post(route('loginCheck'))
             this.form.reset('password')
         }
     }
