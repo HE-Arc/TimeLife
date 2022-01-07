@@ -9,7 +9,7 @@
             </b-navbar-item>
         </template>
         <template #start v-if="user">
-            <b-navbar-item href="#">
+            <b-navbar-item href="/albums">
                 Albums
             </b-navbar-item>
             <b-navbar-item href="/profil">

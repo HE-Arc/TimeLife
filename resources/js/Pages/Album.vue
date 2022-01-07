@@ -21,10 +21,10 @@
             </div>
             <!-- Display my albums -->
             <div v-show="myAlbums.length > 0" class="columns is-multiline">
-                <div v-for="n in 4" :key="n" class="column is-one-quarter">
+                <div v-for="album in myAlbums" :key="album.id" class="column is-one-quarter">
                     <CardAlbum
-                        title="Vacances a Rome"
-                        username="Bedric Sila"
+                        title="TEST"
+                        username="TEST"
                         thumbnail="https://picsum.photos/600/400"
                     />
                 </div>
@@ -119,5 +119,6 @@ export default {
         },
     },
     props: ["myAlbums", "sharedAlbums"],
+
 };
 </script>

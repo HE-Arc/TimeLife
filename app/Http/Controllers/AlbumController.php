@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Photo;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AlbumController extends Controller
@@ -13,10 +14,10 @@ class AlbumController extends Controller
     public function index(Request $request)
     {
         // Should be replaced by the user id of the logged user
-        $myAlbums = Album::where('id_user', '=', 1)->get();
+        $myAlbums = Album::where('id_user', '=', Auth::user()->id)->get();
 
         // Should find a command to get list of sharedAlbums
-        $sharedAlbums = Album::where('id_user', '=', 1)->get();
+        $sharedAlbums = Album::where('id_user', '=', Auth::user()->id)->get();
 
         return Inertia::render('Album', [
             "myAlbums"=>$myAlbums,
@@ -28,6 +29,21 @@ class AlbumController extends Controller
     {
         return Inertia::render('CreateAlbum');
     }
+
+    public function store(Request $request)
+    {
+        $data = [
+            'id_user' => Auth::user()->id,
+            'name' => $request['albumName'],
+            'save_dir' => "/testDir",
+            'is_private' => $request['isPrivate'] ? 1 : 0
+        ];
+        Album::create($data);
+
+        return redirect()->route('albums.index');
+    }
+
+
 
     public function gallery(Request $request, $id)
     {
