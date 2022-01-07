@@ -32,18 +32,17 @@ class AlbumController extends Controller
 
     public function store(Request $request)
     {
+        $private = $request['isPrivate'] === "true" ? 1 : 0;
         $data = [
             'id_user' => Auth::user()->id,
             'name' => $request['albumName'],
             'save_dir' => "/testDir",
-            'is_private' => $request['isPrivate'] ? 1 : 0
+            'is_private' => $private,
         ];
         Album::create($data);
 
         return redirect()->route('albums.index');
     }
-
-
 
     public function gallery(Request $request, $id)
     {
