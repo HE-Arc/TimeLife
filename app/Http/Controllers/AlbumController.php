@@ -17,7 +17,7 @@ class AlbumController extends Controller
         $myAlbums = Album::where('id_user', '=', Auth::user()->id)->get();
 
         // Should find a command to get list of sharedAlbums
-        $sharedAlbums = Album::where('id_user', '=', Auth::user()->id)->get();
+        $sharedAlbums = Album::where('is_private', '=', 0)->get();
 
         return Inertia::render('Album', [
             "myAlbums"=>$myAlbums,
