@@ -31,22 +31,23 @@ class PhotoController extends Controller
             $savedPath = $file->store("{$id}", 'album_data');
 
             // EXIF DATA EXTRACTION
-            $exif = exif_read_data($file);
-            if (array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
+            $exif = @exif_read_data($file); // Return false if no data can be read
+
+            if ($exif && array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
                 $latitude = $this->gps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
             }
             else {
                 $latitude = "";
             }
 
-            if (array_key_exists("GPSLongitude", $exif) && array_key_exists("GPSLongitudeRef", $exif)) {
+            if ($exif && array_key_exists("GPSLongitude", $exif) && array_key_exists("GPSLongitudeRef", $exif)) {
                 $longitude = $this->gps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
             }
             else {
                 $longitude = "";
             }
 
-            $dateTime = array_key_exists("DateTime", $exif) ? new DateTime($exif["DateTime"]) : new DateTime();
+            $dateTime = $exif && array_key_exists("DateTime", $exif) ? new DateTime($exif["DateTime"]) : new DateTime();
 
             array_push($photosRows, [
                "id_album" => $id,
