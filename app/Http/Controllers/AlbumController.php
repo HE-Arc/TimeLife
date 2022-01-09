@@ -41,8 +41,9 @@ class AlbumController extends Controller
             ->get();
         //dd($photos);
         return Inertia::render('Gallery', [
-            "photos"=>$photos,
             'user' => Auth::user(),
+            "photos" => $photos,
+            "galleryId" => $id
         ]);
     }
 

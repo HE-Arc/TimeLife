@@ -82,12 +82,16 @@ export default {
                 component: UploadModal,
                 hasModalCard: true,
                 customClass: '',
-                trapFocus: true
+                trapFocus: true,
+                props: {
+                    "galleryId": this.galleryId
+                }
             })
         }
     },
     props: [
         'photos',
+        'galleryId'
     ],
 };
 </script>
