@@ -30,33 +30,16 @@ class PhotoController extends Controller
         foreach($files as $file) {
             $savedPath = $file->store("{$id}", 'album_data');
 
-            // EXIF DATA EXTRACTION
-            $exif = @exif_read_data($file); // Return false if no data can be read
-
-            if ($exif && array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
-                $latitude = $this->gps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
-            }
-            else {
-                $latitude = "";
-            }
-
-            if ($exif && array_key_exists("GPSLongitude", $exif) && array_key_exists("GPSLongitudeRef", $exif)) {
-                $longitude = $this->gps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
-            }
-            else {
-                $longitude = "";
-            }
-
-            $dateTime = $exif && array_key_exists("DateTime", $exif) ? new DateTime($exif["DateTime"]) : new DateTime();
+            $exif = $this->exif_extract($file);
 
             array_push($photosRows, [
                "id_album" => $id,
                "name" =>  $file->getClientOriginalName(),
                 "description" => "",
                 "filename" => $savedPath,
-                "latitude" => $latitude,
-                "longitude" => $longitude,
-                "date_p" => $dateTime,
+                "latitude" => $exif["latitude"],
+                "longitude" => $exif["longitude"],
+                "date_p" => $exif["date_p"],
                 "created_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
                 "updated_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
             ]);
@@ -66,6 +49,45 @@ class PhotoController extends Controller
         Photo::insert($photosRows);
 
         return Redirect::route("album.gallery", ["id" => $id]);
+    }
+
+    /**
+     * Extract exif data (latitude, longitude, date) from a given picture
+     *
+     * @param file $file Picture to extract
+     * @return array
+     */
+    private function exif_extract($file)
+    {
+        $exif = @exif_read_data($file); // Return false if no data can be read
+
+        $latitude = "";
+        $longitude = "";
+        $date_p = new DateTime();
+
+        if ($exif) {
+            if (array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
+                $latitude = $this->gps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
+            }
+
+            if (array_key_exists("GPSLongitude", $exif) && array_key_exists("GPSLongitudeRef", $exif)) {
+                $longitude = $this->gps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
+            }
+
+            if (array_key_exists("DateTime", $exif)) {
+                try {
+                    $date_p = new DateTime($exif["DateTime"]);
+                } catch (Exception $e) {
+                    $date_p = new DateTime();
+                }
+            }
+        }
+
+        return [
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "date_p" => $date_p
+        ];
     }
 
     /**
