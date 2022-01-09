@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Album;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -37,10 +39,15 @@ class UserController extends Controller
 
     }
 
-    public function profil()
+    public function profile($id)
     {
-        return Inertia::render('Profil', [
+        $publicUser = User::where('id', '=', $id)->first();
+        $publicAlbums = Album::where('id_user', '=', $id)->get();
 
+        return Inertia::render('Profile', [
+            "publicUser" => $publicUser,
+            "publicAlbums" => $publicAlbums,
+            'user' => Auth::user(),
         ]);
     }
 
@@ -58,7 +65,7 @@ class UserController extends Controller
         {
             Auth::login($user);
 
-            return redirect()->intended('/profil');
+            return redirect()->intended('/album');
         }
         else
         {
