@@ -2,7 +2,16 @@
     <div>
     <Menu />
     <Head title="Home" />
+    <b-message
+            class="message"
+            title="User created"
+            type="is-success"
+            v-if="$page.props.flash.success"
+            >
+                {{ $page.props.flash.success }}
+        </b-message>
     <section class="hero is-dark is-fullheight-with-navbar">
+
         <div class="hero-body">
             <div class="container has-text-centered">
                 <img src="/img/logo_tmp.png">
@@ -31,6 +40,13 @@
             width: 300px;
         }
     }
+    .message{
+        position: absolute;
+        width: 40vw;
+        top: 10vh;
+        left: 33%;
+        z-index: 120;
+    }
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
@@ -51,7 +67,7 @@ export default {
         canRegister: Boolean,
         laravelVersion: String,
         phpVersion: String,
-        user: Object,
+        user: Object
     }
 };
 </script>

@@ -15,7 +15,6 @@ class AlbumController extends Controller
 {
     public function index(Request $request)
     {
-
         // Should be replaced by the user id of the logged user
         $myAlbums = Album::where('id_user', '=', 1)->get();
 
