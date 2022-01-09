@@ -24,7 +24,7 @@
                 <div v-for="album in myAlbums" :key="album.id" class="column is-one-quarter">
                     <CardAlbum
                         :title="album.name"
-                        :username="album.id_user"
+                        :username="album.first_name + ' ' + album.last_name"
                         thumbnail="https://picsum.photos/600/400"
                     />
                 </div>
@@ -63,7 +63,7 @@
                 <div v-for="album in sharedAlbums" :key="album.id" class="column is-one-quarter">
                     <CardAlbum
                         :title="album.name"
-                        :username="album.id_user"
+                        :username="album.first_name + ' ' + album.last_name"
                         thumbnail="https://picsum.photos/600/400"
                     />
                 </div>

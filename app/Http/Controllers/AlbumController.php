@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Photo;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +15,10 @@ class AlbumController extends Controller
     public function index(Request $request)
     {
         // Should be replaced by the user id of the logged user
-        $myAlbums = Album::where('id_user', '=', Auth::user()->id)->get();
+        $myAlbums = Album::where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
 
         // Should find a command to get list of sharedAlbums
-        $sharedAlbums = Album::where('is_private', '=', 0)->get();
+        $sharedAlbums = Album::where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
 
         return Inertia::render('Album', [
             "myAlbums"=>$myAlbums,

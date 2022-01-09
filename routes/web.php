@@ -49,3 +49,5 @@ Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCh
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/createAlbum', [AlbumController::class, 'create']);
+
+
