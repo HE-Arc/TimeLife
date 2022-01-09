@@ -66,6 +66,7 @@ export default {
     methods: {
         submit() {
             this.$inertia.post(route("albums.store"), this.form);
+            this.$parent.close();
         },
     },
 };
