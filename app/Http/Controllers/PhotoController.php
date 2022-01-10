@@ -54,7 +54,7 @@ class PhotoController extends Controller
     /**
      * Extract exif data (latitude, longitude, date) from a given picture
      *
-     * @param file $file Picture to extract
+     * @param \Illuminate\Http\UploadedFile $file Picture to extract
      * @return array
      */
     private function exif_extract($file)
@@ -77,7 +77,7 @@ class PhotoController extends Controller
             if (array_key_exists("DateTime", $exif)) {
                 try {
                     $date_p = new DateTime($exif["DateTime"]);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $date_p = new DateTime();
                 }
             }
