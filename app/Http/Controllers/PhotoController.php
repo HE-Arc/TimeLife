@@ -96,7 +96,7 @@ class PhotoController extends Controller
      * @see https://stackoverflow.com/questions/2526304/php-extract-gps-exif-data
      * @param string $coordinate
      * @param string $hemisphere
-     * @return string $coordinate
+     * @return float $coordinate
      */
     private function gps($coordinate, $hemisphere) {
         if (is_string($coordinate)) {
