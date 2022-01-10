@@ -39,9 +39,16 @@ class UserController extends Controller
 
     public function profil()
     {
-        return Inertia::render('Profil', [
+        if(Auth::check())
+        {
+            return Inertia::render('Profil', [
 
-        ]);
+            ]);
+        }
+        else
+        {
+            return redirect()->route('home')->with('error', 'You have to be connected to access this page');
+        }
     }
 
     public function loginCheck(Request $request)
