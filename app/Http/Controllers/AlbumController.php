@@ -51,9 +51,15 @@ class AlbumController extends Controller
         gallery();
     }
 
-    public function timeline(Request $request)
+    public function timeline(Request $request, int $id)
     {
-        return Inertia::render('Timeline');
-    }
+        $photos = Photo::select("date_p", "filename", "photos.name")
+            ->where('id_album', '=', $id)
+            ->orderBy('date_p')
+            ->get();
 
+        return Inertia::render('Timeline', [
+            "photos" => $photos
+        ]);
+    }
 }
