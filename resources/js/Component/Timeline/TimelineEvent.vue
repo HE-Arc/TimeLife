@@ -7,24 +7,8 @@
             <h3 class="event-card__name">{{ event.name }}</h3>
             <p class="event-card__description">{{ event.description }}</p>
         </div>-->
-
-        <div class="event-card__actions">
-            <button
-                class="event-card__action-button danger"
-                @click=""
-            >
-                <i class="bx bxs-trash"></i>
-            </button>
-            <button
-                class="event-card__action-button warning"
-                @click=""
-            >
-                <i class="bx bxs-edit"></i>
-            </button>
-        </div>
     </div>
 </template>
-
 
 <script>
 import Bar from "./Bar";
@@ -78,17 +62,5 @@ export default {
 .event-card__description {
     margin-top: 5px;
 }
-.event-card__actions {
-    display: flex;
-    opacity: 0.3;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-.danger {
-    background-color: #e95678;
-}
-.warning {
-    background-color: #fab795;
-}
+
 </style>
