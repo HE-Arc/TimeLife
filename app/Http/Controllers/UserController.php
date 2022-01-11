@@ -123,7 +123,7 @@ class UserController extends Controller
             }
             else
             {
-                return redirect()->route('updateView', ['user' => $user])->with('error', 'Error password');
+                return redirect()->route('updateView', ['user' => $user])->with('error', 'Invalid password');
             }
         }
         else
