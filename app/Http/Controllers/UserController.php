@@ -54,6 +54,7 @@ class UserController extends Controller
         if(Auth::check())
         {
             $publicUser = User::where('id', '=', $id)->first();
+            $gravatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $publicUser->email ) ) )."?d=mp&s=256";
 
             $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
                 ->where('is_private', '=', 0)
@@ -67,6 +68,7 @@ class UserController extends Controller
                 "publicUser" => $publicUser,
                 "publicAlbums" => $publicAlbums,
                 "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
+                'gravatar' => $gravatar,
                 'user' => Auth::user(),
             ]);
         }
