@@ -26,14 +26,14 @@ export default {
 
 <style scoped lang="scss">
 
-$bar-color: #fab795;
+$bar-color: #F79F1F;
 
 time {
     width: 120px;
     height: 120px;
     margin: 15px;
     text-align: center;
-    border: 3px solid #fac29a;
+    border: 3px solid $bar-color;
     border-radius: 100%;
     background-color: white;
     position: relative;
