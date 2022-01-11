@@ -52,10 +52,10 @@ export default {
     name: "CreateModal",
     data() {
         return {
-            form: {
+            form: this.$inertia.form({
                 albumName: "",
                 isPrivate: null,
-            },
+            }),
         };
     },
     computed: {
@@ -65,9 +65,12 @@ export default {
     },
     methods: {
         submit() {
-            this.$inertia.post(route("albums.store"), this.form);
+            this.form.post(route("albums.store"), {
+                onSuccess: () => this.$parent.close(),
+            });
         },
     },
+
 };
 </script>
 

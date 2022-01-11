@@ -21,11 +21,15 @@
             </div>
             <!-- Display my albums -->
             <div v-show="myAlbums.length > 0" class="columns is-multiline">
-                <div v-for="n in 4" :key="n" class="column is-one-quarter">
+                <div
+                    v-for="album in myAlbums"
+                    :key="album.id"
+                    class="column is-one-quarter"
+                >
                     <CardAlbum
-                        title="Vacances a Rome"
-                        username="Bedric Sila"
-                        thumbnail="https://picsum.photos/600/400"
+                        :title="album.name"
+                        :username="album.first_name + ' ' + album.last_name"
+                        :thumbnail="myAlbumsThumbnails[album.id]"
                     />
                 </div>
             </div>
@@ -60,11 +64,15 @@
             </div>
             <!-- Display shared albums -->
             <div v-show="sharedAlbums.length > 0" class="columns is-multiline">
-                <div v-for="n in 3" :key="n" class="column is-one-quarter">
+                <div
+                    v-for="album in sharedAlbums"
+                    :key="album.id"
+                    class="column is-one-quarter"
+                >
                     <CardAlbum
-                        title="Vacances a Rome"
-                        username="Bedric Sila"
-                        thumbnail="https://picsum.photos/600/400"
+                        :title="album.name"
+                        :username="album.first_name + ' ' + album.last_name"
+                        :thumbnail="sharedAlbumsThumbnails[album.id]"
                     />
                 </div>
             </div>
@@ -118,6 +126,11 @@ export default {
             });
         },
     },
-    props: ["myAlbums", "sharedAlbums"],
+    props: [
+        "myAlbums",
+        "myAlbumsThumbnails",
+        "sharedAlbums",
+        "sharedAlbumsThumbnails",
+    ],
 };
 </script>
