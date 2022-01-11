@@ -26,7 +26,7 @@
                 <p class="subtitle">
                     Time to share your Life like never before
                 </p>
-                <div class="buttons is-centered">
+                <div class="buttons is-centered" v-if="user==null">
                     <a class="button is-primary">
                         <strong>Sign up</strong>
                     </a>
