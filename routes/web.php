@@ -33,9 +33,8 @@ Route::get('/', function () {
 
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
-
 Route::get('/album', [AlbumController::class, 'index'])->name('album');
-
+Route::get('/album/{id}/timeline', [AlbumController::class, 'timeline'])->name("album.timeline");
 
 Route::resource('/users', UserController::class);
 Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);

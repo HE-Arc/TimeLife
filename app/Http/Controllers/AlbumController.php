@@ -53,7 +53,7 @@ class AlbumController extends Controller
 
     public function timeline(Request $request)
     {
-        gallery();
+        return Inertia::render('Timeline');
     }
 
 }
