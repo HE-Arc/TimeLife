@@ -2,23 +2,18 @@
     <div>
         <Head title="Timeline" ></Head>
         <Menu />
-        <section>
-
-        <div class="timeline">
-            <TimelineEvent
-                :event="event"
-                :index="i"
-                v-for="(event, i) of events"
-                :key="i"
-            />
-        </div>
-
+        <section class="timeline-box">
+            <div class="timeline">
+                <TimelineEvent
+                    :event="event"
+                    :index="i"
+                    v-for="(event, i) of events"
+                    :key="i"
+                />
+            </div>
         </section>
         <Footer />
     </div>
-
-
-
 </template>
 
 <script>
@@ -39,15 +34,15 @@ export default {
     data(){
         return {
             events: [
-                {name: "LOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""},
-                {name: "LOsL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=96", date: ""}
+                {name: "LOAFPJEAPOFAPOJFAWFL",  description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
+                {name: "LOsL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""}
             ]
         }
     },
@@ -57,10 +52,19 @@ export default {
 <style scoped lang="scss">
 .timeline {
     display: flex;
-    overflow-x: auto;
-    background-color: rgba(0,0,0,.6);
-    min-height: calc(100vh - 3.25rem)
 }
+
+.timeline-box {
+    display:flex;
+    overflow-x: auto;
+    background-color: #833471;
+    min-height: calc(100vh - 3.25rem);
+}
+
+.scroll-message {
+    display:flex;
+}
+
 .timeline::-webkit-scrollbar {
     height: 20px;
 }
