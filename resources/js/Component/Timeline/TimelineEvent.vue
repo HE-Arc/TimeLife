@@ -1,17 +1,12 @@
 <template>
     <div class="event-card">
-        <img :src="event.image" :alt="event.name" class="event-card__image thumbnailed" />
+        <img :src="event.image" :alt="event.name" class="event-image thumbnailed" />
 
         <Bar :date="event.date" class="example" />
 
         <div class="box event-title">
             <h3>{{ event.name | truncate(10, '...')  }}</h3>
         </div>
-
-        <!--<div class="content">
-            <h3 class="event-card__name">{{ event.name }}</h3>
-            <p class="event-card__description">{{ event.description }}</p>
-        </div>-->
     </div>
 </template>
 
@@ -62,31 +57,12 @@ export default {
     justify-items: center;
     align-self:center;
 }
-.event-card__image {
+.event-image {
     width: 80%;
     height: 100%;
     border-radius: 5px;
     object-fit: cover;
     object-position: center;
-}
-
-.image-overlay {
-    object-fit: cover;
-    object-position: center;
-}
-
-.content {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-.event-card:hover .event-card__actions {
-    opacity: 1;
-}
-.event-card__name,
-.event-card__description {
-    margin-top: 5px;
 }
 
 </style>
