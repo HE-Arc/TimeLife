@@ -77,7 +77,7 @@ class UserController extends Controller
         {
             Auth::login($user);
 
-            return redirect()->intended('/album');
+            return redirect()->intended('/albums');
         }
         else
         {
