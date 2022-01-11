@@ -28,7 +28,7 @@ class AlbumController extends Controller
         }
         else
         {
-            return redirect()->route('home')->with('error', 'You have to be connected to access this page');
+            return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
     }
 
