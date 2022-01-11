@@ -9,6 +9,12 @@
                         {{ $page.props.flash.error }}
 
         </b-message>
+        <b-message
+                    type="is-success"
+                    v-if="$page.props.flash.success">
+                        {{ $page.props.flash.success }}
+
+        </b-message>
         <div class="box">
             <form @submit.prevent="login">
                 <div class="container">

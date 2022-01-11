@@ -98,9 +98,42 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        if(isset($request['oldpassword']))
+        {
+            $request->validate([
+                'email' => 'required',
+                'oldpassword' => 'required',
+                'newpassword' => 'required',
+                'newpassword2' => 'required',
+            ]);
 
-        return redirect()->route('profile', ['id' => $user->id]);
+            if(Hash::check($request['oldpassword'], $user['password']) && $request['newpassword'] == $request['newpassword2'])
+            {
+                $password = Hash::make($request['newpassword']);
+
+                $request['newpassword'] = $password;
+
+                $user->update([
+                    'email' => $request['email'],
+                    'password' => $password
+                ]);
+
+                Auth::logout();
+
+                return redirect()->route('login')->with('success', 'You can now login with our new password or new email');
+            }
+            else
+            {
+                return redirect()->route('updateView', ['user' => $user])->with('error', 'Error password');
+            }
+        }
+        else
+        {
+            $user->update($request->all());
+
+            return redirect()->route('profile', ['id' => $user->id]);
+        }
+
     }
 
 
