@@ -20,7 +20,7 @@
                     </div>
                     <!-- Please do not indent in another way-->
                     <div class="box">{{ publicUser.description }}</div>
-                    <a class="button is-light" :href="route('updateView')" v-if="user.id == publicUser.id"> Modify Profile </a>
+                    <a class="button is-primary" :href="route('updateView')" v-if="user.id == publicUser.id"><strong> Modify Profile </strong></a>
                 </div>
 
                 <div class="column">
