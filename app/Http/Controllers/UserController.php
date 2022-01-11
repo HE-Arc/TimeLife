@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -30,6 +31,10 @@ class UserController extends Controller
 
         if($request['description'] === null)
             $request['description'] = " ";
+
+        $password = Hash::make($request['password']);
+
+        $request['password'] = $password;
 
         User::create($request->all());
 
@@ -59,9 +64,9 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where($request->all())->first();
+        $user = User::where('email', '=', $request['email'])->first();
 
-        if($user != null)
+        if($user != null && Hash::check($request['password'], $user['password']))
         {
             Auth::login($user);
 
