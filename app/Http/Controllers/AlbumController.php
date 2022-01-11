@@ -28,13 +28,14 @@ class AlbumController extends Controller
                 "myAlbumsThumbnails"=>$myAlbumsThumbnails,
                 "sharedAlbums"=>$sharedAlbums,
                 "sharedAlbumsThumbnails"=>$sharedAlbumsThumbnails,
-
+                'user' => Auth::user(),
             ]);
         }
         else
         {
             return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
+
     }
 
     public function create(Request $request)
@@ -63,6 +64,7 @@ class AlbumController extends Controller
             ->get();
         //dd($photos);
         return Inertia::render('Gallery', [
+            'user' => Auth::user(),
             "photos" => $photos,
             "galleryId" => $id
         ]);

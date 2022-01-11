@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Album;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -42,18 +44,24 @@ class UserController extends Controller
 
     }
 
-    public function profil()
+    public function profile($id)
     {
         if(Auth::check())
         {
-            return Inertia::render('Profil', [
+            $publicUser = User::where('id', '=', $id)->first();
+            $publicAlbums = Album::where('id_user', '=', $id)->get();
 
+            return Inertia::render('Profile', [
+                "publicUser" => $publicUser,
+                "publicAlbums" => $publicAlbums,
+                'user' => Auth::user(),
             ]);
         }
         else
         {
             return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
+
     }
 
     public function loginCheck(Request $request)
@@ -70,7 +78,7 @@ class UserController extends Controller
         {
             Auth::login($user);
 
-            return redirect()->intended('/profil');
+            return redirect()->intended('/album');
         }
         else
         {
