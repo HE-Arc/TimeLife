@@ -33,7 +33,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/albums/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
+Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
+Route::get('/album', [AlbumController::class, 'index'])->name('album');
+Route::get('/album/{id}/timeline', [AlbumController::class, 'timeline'])->name("album.timeline");
 
 Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
 
