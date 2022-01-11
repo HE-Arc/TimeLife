@@ -103,11 +103,9 @@ class UserController extends Controller
             $request->validate([
                 'email' => 'required',
                 'oldpassword' => 'required',
-                'newpassword' => 'required',
-                'newpassword2' => 'required',
             ]);
 
-            if(Hash::check($request['oldpassword'], $user['password']) && $request['newpassword'] == $request['newpassword2'])
+            if(Hash::check($request['oldpassword'], $user['password']))
             {
                 $password = Hash::make($request['newpassword']);
 
@@ -120,7 +118,7 @@ class UserController extends Controller
 
                 Auth::logout();
 
-                return redirect()->route('login')->with('success', 'You can now login with our new password or new email');
+                return redirect()->route('login')->with('success', 'You can now login with your new password or new email');
             }
             else
             {

@@ -78,6 +78,12 @@
                 </div>
             </form>
         </div>
+        <b-message
+                    type="is-danger"
+                    v-if="$page.props.flash.error">
+                        {{ $page.props.flash.error }}
+
+        </b-message>
     </section>
     <Footer />
     </div>
@@ -131,10 +137,17 @@ export default {
         },
         updateId()
         {
-            this.formIdentity.put(route('users.update', this.user))
-            this.formIdentity.reset('oldpassword')
-            this.formIdentity.reset('newpassword')
-            this.formIdentity.reset('newpassword2')
+            if(this.formIdentity.newpassword ==  this.formIdentity.newpassword2)
+            {
+                this.formIdentity.put(route('users.update', this.user))
+                this.formIdentity.reset('oldpassword')
+                this.formIdentity.reset('newpassword')
+                this.formIdentity.reset('newpassword2')
+            }
+            else
+            {
+                this.$page.props.flash.error = "New password are not the same"
+            }
         }
     }
 };
