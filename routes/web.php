@@ -35,11 +35,9 @@ Route::get('/', function () {
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
 
-Route::get('/album', [AlbumController::class, 'index'])->name('album');
-
-
 Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
 
+Route::resource('/albums', AlbumController::class);
 Route::resource('/users', UserController::class);
 Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
 
@@ -52,3 +50,5 @@ Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCh
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/createAlbum', [AlbumController::class, 'create']);
+
+

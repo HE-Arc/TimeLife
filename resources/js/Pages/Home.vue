@@ -10,6 +10,14 @@
             >
                 {{ $page.props.flash.success }}
         </b-message>
+        <b-message
+            class="message"
+            title="Error access"
+            type="is-danger"
+            v-if="$page.props.flash.error"
+            >
+                {{ $page.props.flash.error }}
+        </b-message>
     <section class="hero is-dark is-fullheight-with-navbar">
 
         <div class="hero-body">
