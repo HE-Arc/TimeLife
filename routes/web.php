@@ -45,6 +45,8 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
+Route::get('/updateUser', [UserController::class, 'updateView'])->name('updateView');
+
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
 Route::get('/logout', [UserController::class, 'logout']);
