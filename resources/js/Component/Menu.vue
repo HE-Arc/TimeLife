@@ -9,7 +9,7 @@
             </b-navbar-item>
         </template>
         <template #start v-if="user">
-            <b-navbar-item href="/albums">
+            <b-navbar-item :href="route('albums.index')">
                 Albums
             </b-navbar-item>
             <b-navbar-item href="/profil">
