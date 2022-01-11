@@ -55,7 +55,12 @@ class UserController extends Controller
         {
             $publicUser = User::where('id', '=', $id)->first();
 
-            $publicAlbums = Album::where('id_user', '=', $id)->get();
+            $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
+                ->where('is_private', '=', 0)
+                ->where('id_user', '=', $id)
+                ->join('users', 'users.id', '=', 'albums.id_user')
+                ->get();
+
             $publicAlbumsThumbnails = $this->ThumbnailService->getThumbnail($publicAlbums);
 
             return Inertia::render('Profile', [
