@@ -89,7 +89,7 @@ class AlbumController extends Controller
             $photo = Photo::where('id_album', '=', $album['id'])
             ->first();
             if ($photo) {
-                $thumbnail[$album['id']] = "album_pic/".$photo['filename'];
+                $thumbnail[$album['id']] = route('storage.url', $photo['filename']);
             }
             else {
                 $thumbnail[$album['id']] = "";
