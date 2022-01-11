@@ -67,7 +67,7 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
@@ -101,8 +101,9 @@ class UserController extends Controller
         if(isset($request['oldpassword']))
         {
             $request->validate([
-                'email' => 'required',
+                'email' => 'required|email',
                 'oldpassword' => 'required',
+                'newpassword' => 'required',
             ]);
 
             if(Hash::check($request['oldpassword'], $user['password']))
