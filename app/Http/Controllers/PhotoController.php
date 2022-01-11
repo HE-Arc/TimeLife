@@ -30,16 +30,16 @@ class PhotoController extends Controller
         foreach($files as $file) {
             $savedPath = $file->store("{$id}", 'album_data');
 
-            // TODO: EXIF DATA EXTRACTION
+            $exif = $this->exif_extract($file);
 
             array_push($photosRows, [
                "id_album" => $id,
                "name" =>  $file->getClientOriginalName(),
                 "description" => "",
                 "filename" => $savedPath,
-                "latitude" => "",
-                "longitude" => "",
-                "date_p" => new DateTime("@0"), // 1 January 1970
+                "latitude" => $exif["latitude"],
+                "longitude" => $exif["longitude"],
+                "date_p" => $exif["date_p"],
                 "created_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
                 "updated_at" => new DateTime(), // Theses two must be specified because Photo::insert doesn't use Eloquent
             ]);
@@ -50,4 +50,71 @@ class PhotoController extends Controller
 
         return Redirect::route("album.gallery", ["id" => $id]);
     }
+
+    /**
+     * Extract exif data (latitude, longitude, date) from a given picture
+     *
+     * @param \Illuminate\Http\UploadedFile $file Picture to extract
+     * @return array
+     */
+    private function exif_extract($file)
+    {
+        $exif = @exif_read_data($file); // Return false if no data can be read
+
+        $latitude = "";
+        $longitude = "";
+        $date_p = new DateTime();
+
+        if ($exif) {
+            if (array_key_exists("GPSLatitude" ,$exif) && array_key_exists("GPSLatitudeRef" ,$exif)) {
+                $latitude = $this->gps($exif["GPSLatitude"], $exif['GPSLatitudeRef']);
+            }
+
+            if (array_key_exists("GPSLongitude", $exif) && array_key_exists("GPSLongitudeRef", $exif)) {
+                $longitude = $this->gps($exif["GPSLongitude"], $exif['GPSLongitudeRef']);
+            }
+
+            if (array_key_exists("DateTime", $exif)) {
+                try {
+                    $date_p = new DateTime($exif["DateTime"]);
+                } catch (\Exception $e) {
+                    $date_p = new DateTime();
+                }
+            }
+        }
+
+        return [
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "date_p" => $date_p
+        ];
+    }
+
+    /**
+     * Convert coordonates from exif format to latitude and longitude format
+     *
+     * @see https://stackoverflow.com/questions/2526304/php-extract-gps-exif-data
+     * @param string $coordinate
+     * @param string $hemisphere
+     * @return float $coordinate
+     */
+    private function gps($coordinate, $hemisphere) {
+        if (is_string($coordinate)) {
+            $coordinate = array_map("trim", explode(",", $coordinate));
+        }
+        for ($i = 0; $i < 3; $i++) {
+            $part = explode('/', $coordinate[$i]);
+            if (count($part) == 1) {
+            $coordinate[$i] = $part[0];
+            } else if (count($part) == 2) {
+            $coordinate[$i] = floatval($part[0])/floatval($part[1]);
+            } else {
+            $coordinate[$i] = 0;
+            }
+        }
+        list($degrees, $minutes, $seconds) = $coordinate;
+        $sign = ($hemisphere == 'W' || $hemisphere == 'S') ? -1 : 1;
+        return $sign * ($degrees + $minutes/60 + $seconds/3600);
+    }
+
 }

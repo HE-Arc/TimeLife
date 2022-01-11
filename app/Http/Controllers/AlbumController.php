@@ -8,7 +8,6 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class AlbumController extends Controller
 {
     public function index(Request $request)
@@ -24,6 +23,7 @@ class AlbumController extends Controller
             return Inertia::render('Album', [
                 "myAlbums"=>$myAlbums,
                 "sharedAlbums"=>$sharedAlbums,
+                'user' => Auth::user(),
             ]);
         }
         else
@@ -58,6 +58,7 @@ class AlbumController extends Controller
             ->get();
         //dd($photos);
         return Inertia::render('Gallery', [
+            'user' => Auth::user(),
             "photos" => $photos,
             "galleryId" => $id
         ]);

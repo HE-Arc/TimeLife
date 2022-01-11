@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,7 @@ Route::get('/', function () {
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
 
-// Route::get('/album', [AlbumController::class, 'index'])->name('album');
+Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
 
 Route::resource('/albums', AlbumController::class);
 Route::resource('/users', UserController::class);
@@ -42,7 +43,7 @@ Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', '
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
-Route::get('/profil', [UserController::class, 'profil']);
+Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
