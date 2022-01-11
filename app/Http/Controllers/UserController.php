@@ -13,10 +13,10 @@ use Inertia\Inertia;
 class UserController extends Controller
 {
 
-    protected $ThumbnailService;
+    protected $thumbnailService;
 
-    function __construct(ThumbnailService $ThumbnailService){
-        $this->ThumbnailService = $ThumbnailService;
+    function __construct(ThumbnailService $thumbnailService){
+        $this->thumbnailService = $thumbnailService;
     }
 
     public function index()
@@ -61,7 +61,7 @@ class UserController extends Controller
                 ->join('users', 'users.id', '=', 'albums.id_user')
                 ->get();
 
-            $publicAlbumsThumbnails = $this->ThumbnailService->getThumbnail($publicAlbums);
+            $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
 
             return Inertia::render('Profile', [
                 "publicUser" => $publicUser,

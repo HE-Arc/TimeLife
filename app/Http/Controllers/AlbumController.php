@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
 {
-    protected $ThumbnailService;
+    protected $thumbnailService;
 
-    function __construct(ThumbnailService $ThumbnailService){
-        $this->ThumbnailService = $ThumbnailService;
+    function __construct(ThumbnailService $thumbnailService){
+        $this->thumbnailService = $thumbnailService;
     }
 
     public function index(Request $request)
@@ -24,11 +24,11 @@ class AlbumController extends Controller
         {
             // Should be replaced by the user id of the logged user
             $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $myAlbumsThumbnails = $this->ThumbnailService->getThumbnail($myAlbums);
+            $myAlbumsThumbnails = $this->thumbnailService->getThumbnail($myAlbums);
 
             // Should find a command to get list of sharedAlbums
             $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $sharedAlbumsThumbnails = $this->ThumbnailService->getThumbnail($sharedAlbums);
+            $sharedAlbumsThumbnails = $this->thumbnailService->getThumbnail($sharedAlbums);
 
 
             return Inertia::render('Album', [
