@@ -4,7 +4,7 @@
         <span class="vertical-bar"></span>
     <time>
         <template v-if="date.day !== 0"> {{ date.day }} <br /> </template>
-        <template v-if="date.month !== 0"> <br /> </template>
+        <template v-if="date.month !== 0"> January <br /> </template>
         {{ date.year }}
     </time>
         <span class="vertical-bar bottom"></span>
@@ -35,7 +35,7 @@ time {
     text-align: center;
     border: 3px solid #fac29a;
     border-radius: 100%;
-    background-color: #1a1c23;
+    background-color: white;
     position: relative;
     display: flex;
     justify-content: center;
