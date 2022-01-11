@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AlbumController extends Controller
 {
     public function index(Request $request)
@@ -15,14 +16,19 @@ class AlbumController extends Controller
         if(Auth::check())
         {
             // Should be replaced by the user id of the logged user
-            $myAlbums = Album::where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $myAlbumsThumbnails = $this->getThumbnail($myAlbums);
 
-            // TODO: List of album shared with a user
-            $sharedAlbums = Album::where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            // Should find a command to get list of sharedAlbums
+            $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $sharedAlbumsThumbnails = $this->getThumbnail($sharedAlbums);
+
 
             return Inertia::render('Album', [
                 "myAlbums"=>$myAlbums,
+                "myAlbumsThumbnails"=>$myAlbumsThumbnails,
                 "sharedAlbums"=>$sharedAlbums,
+                "sharedAlbumsThumbnails"=>$sharedAlbumsThumbnails,
                 'user' => Auth::user(),
             ]);
         }
@@ -30,6 +36,7 @@ class AlbumController extends Controller
         {
             return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
+
     }
 
     public function create(Request $request)
@@ -72,6 +79,23 @@ class AlbumController extends Controller
     public function timeline(Request $request)
     {
         gallery();
+    }
+
+    private function getThumbnail($albums)
+    {
+        $thumbnail = array();
+
+        foreach ($albums as $album ) {
+            $photo = Photo::where('id_album', '=', $album['id'])
+            ->first();
+            if ($photo) {
+                $thumbnail[$album['id']] = route('storage.url', $photo['filename']);
+            }
+            else {
+                $thumbnail[$album['id']] = "";
+            }
+        }
+        return $thumbnail;
     }
 
 }

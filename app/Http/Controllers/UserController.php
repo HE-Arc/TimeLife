@@ -60,6 +60,7 @@ class UserController extends Controller
         {
             return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
+
     }
 
     public function loginCheck(Request $request)
@@ -76,7 +77,7 @@ class UserController extends Controller
         {
             Auth::login($user);
 
-            return redirect()->intended('/album');
+            return redirect()->intended('/albums');
         }
         else
         {
