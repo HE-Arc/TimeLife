@@ -16,14 +16,19 @@ class AlbumController extends Controller
         if(Auth::check())
         {
             // Should be replaced by the user id of the logged user
-            $myAlbums = Album::where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $myAlbumsThumbnails = $this->getThumbnail($myAlbums);
 
             // Should find a command to get list of sharedAlbums
-            $sharedAlbums = Album::where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
+            $sharedAlbumsThumbnails = $this->getThumbnail($sharedAlbums);
 
             return Inertia::render('Album', [
                 "myAlbums"=>$myAlbums,
+                "myAlbumsThumbnails"=>$myAlbumsThumbnails,
                 "sharedAlbums"=>$sharedAlbums,
+                "sharedAlbumsThumbnails"=>$sharedAlbumsThumbnails,
+
             ]);
         }
         else
@@ -71,6 +76,23 @@ class AlbumController extends Controller
     public function timeline(Request $request)
     {
         gallery();
+    }
+
+    private function getThumbnail($albums)
+    {
+        $thumbnail = array();
+
+        foreach ($albums as $album ) {
+            $photo = Photo::where('id_album', '=', $album['id'])
+            ->first();
+            if ($photo) {
+                $thumbnail[$album['id']] = "album_pic/".$photo['filename'];
+            }
+            else {
+                $thumbnail[$album['id']] = "";
+            }
+        }
+        return $thumbnail;
     }
 
 }
