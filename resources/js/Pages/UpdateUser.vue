@@ -18,8 +18,6 @@
                         <b-input id="description" v-model="form.description" type="textarea"></b-input>
                     </b-field>
 
-                    <b-input id="id" v-model="form.id" type="hidden"></b-input>
-
                     <div class="buttons">
 
                         <button type="submit" class="button is-primary"><strong>Update</strong></button>
@@ -59,7 +57,6 @@ export default {
                 last_name: this.user.last_name,
                 first_name: this.user.first_name,
                 description: this.user.description,
-                id: this.user.id,
             })
         }
     },
