@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::get('/', function () {
 
 Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
 
+Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
 
 Route::resource('/albums', AlbumController::class);
 Route::resource('/users', UserController::class);

@@ -18,7 +18,6 @@ class UserController extends Controller
         return Inertia::render('SignUp', [
 
         ]);
-
     }
 
     public function store(Request $request)

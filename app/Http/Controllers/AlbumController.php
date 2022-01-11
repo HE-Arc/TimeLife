@@ -23,6 +23,7 @@ class AlbumController extends Controller
             $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
             $sharedAlbumsThumbnails = $this->getThumbnail($sharedAlbums);
 
+
             return Inertia::render('Album', [
                 "myAlbums"=>$myAlbums,
                 "myAlbumsThumbnails"=>$myAlbumsThumbnails,
