@@ -59,7 +59,8 @@ class AlbumController extends Controller
             ->get();
 
         return Inertia::render('Timeline', [
-            "photos" => $photos
+            "photos" => $photos,
+            "albumId" => $id
         ]);
     }
 }

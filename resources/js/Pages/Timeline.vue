@@ -3,13 +3,23 @@
         <Head title="Timeline" ></Head>
         <Menu />
         <section class="timeline-box">
-            <div class="timeline">
+            <div class="timeline" v-if="photos.length > 0">
                 <TimelineEvent
                     :event="photo"
                     :index="i"
                     v-for="(photo, i) of photos"
                     :key="i"
                 />
+            </div>
+            <div class="container" v-else>
+                <div class="empty-box has-text-centered box">
+                    <b-icon
+                        icon="folder-open-o"
+                        size="is-large" class="box-icon" custom-size="fa-4x">
+                    </b-icon>
+                    <h2 class="title">It's a little bit empty here...</h2>
+                    <p class="subtitle">Why don't you <a :href="route('album.gallery', albumId)">add</a> some pictures in this album ?</p>
+                </div>
             </div>
         </section>
         <Footer />
@@ -32,7 +42,8 @@ export default {
         Footer,
     },
     props: {
-        photos: {}
+        photos: {},
+        albumId: Number
     },
     data(){
         return {
@@ -43,8 +54,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+@import "~bulma/sass/utilities/mixins";
+
 .timeline {
     display: flex;
+}
+
+.empty-box {
+    @include until($desktop) {
+        width:80vw;
+    }
+    @include from($desktop) {
+        width:50vw;
+    }
+    margin: 0 auto;
+    margin-top:6rem;
+    background-color:rgba(0,0,0,.4);
+
+    & > * {
+        color:white;
+    }
+
+    .box-icon {
+        margin:1rem;
+    }
 }
 
 .timeline-box {
