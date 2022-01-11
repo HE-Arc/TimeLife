@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Album;
-
+use App\Http\Services\ThumbnailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +12,12 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+
+    protected $thumbnailService;
+
+    function __construct(ThumbnailService $thumbnailService){
+        $this->thumbnailService = $thumbnailService;
+    }
 
     public function index()
     {
@@ -48,11 +54,19 @@ class UserController extends Controller
         if(Auth::check())
         {
             $publicUser = User::where('id', '=', $id)->first();
-            $publicAlbums = Album::where('id_user', '=', $id)->get();
+
+            $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
+                ->where('is_private', '=', 0)
+                ->where('id_user', '=', $id)
+                ->join('users', 'users.id', '=', 'albums.id_user')
+                ->get();
+
+            $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
 
             return Inertia::render('Profile', [
                 "publicUser" => $publicUser,
                 "publicAlbums" => $publicAlbums,
+                "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
                 'user' => Auth::user(),
             ]);
         }
