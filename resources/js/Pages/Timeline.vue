@@ -5,9 +5,9 @@
         <section class="timeline-box">
             <div class="timeline">
                 <TimelineEvent
-                    :event="event"
+                    :event="photo"
                     :index="i"
-                    v-for="(event, i) of events"
+                    v-for="(photo, i) of photos"
                     :key="i"
                 />
             </div>
@@ -30,6 +30,9 @@ export default {
         Head,
         Menu,
         Footer,
+    },
+    props: {
+        photos: {}
     },
     data(){
         return {
