@@ -36,17 +36,7 @@ export default {
     },
     data(){
         return {
-            events: [
-                {name: "LOAFPJEAPOFAPOJFAWFL",  description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LsOL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""},
-                {name: "LOsL", description: "AA", image: "https://cdn.libravatar.org/avatar/09927bcf2515b85a5c04d745c02f647b?s=256", date: ""}
-            ]
+
         }
     },
 }

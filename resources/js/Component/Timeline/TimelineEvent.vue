@@ -1,11 +1,11 @@
 <template>
     <div class="event-card">
-        <img :src="event.image" :alt="event.name" class="event-image thumbnailed" />
+        <img :src="route('storage.url', event.filename)" :alt="event.name" class="event-image thumbnailed" />
 
-        <Bar :date="event.date" class="example" />
+        <Bar :date="event.date_p" />
 
         <div class="box event-title">
-            <h3>{{ event.name | truncate(10, '...')  }}</h3>
+            <h3>{{ event.name | truncate(20, '...')  }}</h3>
         </div>
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
     },
     data() {
         return {
-            emitter,
+
         };
     },
 }

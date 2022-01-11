@@ -2,23 +2,36 @@
 <template>
     <div>
         <span class="vertical-bar"></span>
-    <time>
-        <template v-if="date.day !== 0"> {{ date.day }} <br /> </template>
-        <template v-if="date.month !== 0"> January <br /> </template>
-        {{ date.year }}
-    </time>
+    <time v-html="humanDate"></time>
         <span class="vertical-bar bottom"></span>
     </div>
 </template>
 <script>
 export default {
     name: "Bar",
+    props: ["date"],
+    computed: {
+        humanDate() {
+            let d = new Date(this.date);
+            return d.getDate() + "<br>" + this.MONTHS[d.getMonth()] + "<br>" + d.getFullYear();
+        }
+    },
     data() {
         return {
-            date: {
-                day: "10",
-                year:"2021"
-            }
+            MONTHS: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ]
         }
     }
 }
