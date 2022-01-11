@@ -39,6 +39,7 @@ Route::get('/album/{id}/timeline', [AlbumController::class, 'timeline'])->name("
 
 Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
 
+Route::resource('/albums', AlbumController::class);
 Route::resource('/users', UserController::class);
 Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
 
@@ -46,8 +47,12 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
+Route::get('/updateUser', [UserController::class, 'updateView'])->name('updateView');
+
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
 
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/createAlbum', [AlbumController::class, 'create']);
+
+
