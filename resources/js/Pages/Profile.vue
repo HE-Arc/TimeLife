@@ -20,6 +20,7 @@
                     </div>
                     <!-- Please do not indent in another way-->
                     <div class="box">{{ publicUser.description }}</div>
+                    <a class="button is-light" href="/updateUser" v-if="user.id == publicUser.id"> Modify Profile </a>
                 </div>
 
                 <div class="column">
@@ -78,6 +79,6 @@ export default {
         Footer,
         CardAlbum,
     },
-    props: ["publicUser", "publicAlbums"],
+    props: ["publicUser", "publicAlbums", "user"],
 };
 </script>

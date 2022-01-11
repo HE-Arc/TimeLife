@@ -88,6 +88,19 @@ class UserController extends Controller
         }
     }
 
+    public function updateView()
+    {
+        return Inertia::render('UpdateUser', [
+            'user' => Auth::user()
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user->update($request->all());
+
+        return redirect()->route('profile', ['id' => $user->id]);
+    }
 
 
     public function login()
