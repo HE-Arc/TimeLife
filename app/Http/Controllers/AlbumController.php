@@ -60,7 +60,8 @@ class AlbumController extends Controller
 
     public function gallery(Request $request, $id)
     {
-        $photos = Photo::join('albums','photos.id_album', '=', 'albums.id')
+        $photos = Photo::select('photos.*')
+            ->join('albums','photos.id_album', '=', 'albums.id')
             ->where('id_album', '=', $id)
             ->get();
         //dd($photos);

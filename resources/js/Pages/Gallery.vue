@@ -1,70 +1,76 @@
 <template>
     <div>
-    <Menu />
-    <Head title="Gallery" />
-    <section>
-
-        <!-- Column for title and add photos button -->
-        <div class="columns is-vcentered">
-            <div class="column">
-                <h1 class="title is-1">Gallery view</h1>
+        <Menu />
+        <Head title="Gallery" />
+        <section>
+            <!-- Column for title and add photos button -->
+            <div class="columns is-vcentered">
+                <div class="column">
+                    <h1 class="title is-1">Gallery view</h1>
+                </div>
+                <div v-show="photos.length > 0" class="column is-narrow">
+                    <b-button
+                        label="Upload pictures"
+                        type="is-primary"
+                        class="is-right"
+                        icon-left="upload"
+                        icon-pack="fa"
+                        @click="openUploadModal"
+                    />
+                </div>
             </div>
-            <div v-show="photos.length > 0" class="column is-narrow">
-                <b-button
-                    label="Upload pictures"
-                    type="is-primary"
-                    class="is-right"
-                    icon-left="upload"
-                    icon-pack="fa"
-                    @click="openUploadModal" />
-            </div>
-        </div>
 
-        <!-- Display pictures -->
-        <div v-show="photos.length > 0" class="columns is-multiline">
-            <div v-for="n in 10" :key="n" class="column is-one-quarter">
-                <CardPicture />
+            <!-- Display pictures -->
+            <div v-show="photos.length > 0" class="columns is-multiline">
+                <div
+                    v-for="photo in photos"
+                    :key="photo.id"
+                    class="column is-one-quarter"
+                >
+                    <CardPicture
+                        :name="photo.name"
+                        :source="route('storage.url', photo.filename)"
+                    />
+                </div>
             </div>
-        </div>
 
-        <!-- Display message when album is empty -->
-        <div v-show="photos.length < 1">
-            <section class="hero is-fullheight-with-navbar">
-                <div class="hero-body">
-                    <div class="container has-text-centered">
-                        <p class="subtitle">
-                            Nothing to see here, please add your own photos
-                        </p>
-                        <div class="buttons is-centered">
-                            <b-button
-                                label="Upload pictures"
-                                type="is-primary"
-                                class="is-right"
-                                icon-left="upload"
-                                icon-pack="fa"
-                                @click="openUploadModal" />
+            <!-- Display message when album is empty -->
+            <div v-show="photos.length < 1">
+                <section class="hero is-fullheight-with-navbar">
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            <p class="subtitle">
+                                Nothing to see here, please add your own photos
+                            </p>
+                            <div class="buttons is-centered">
+                                <b-button
+                                    label="Upload pictures"
+                                    type="is-primary"
+                                    class="is-right"
+                                    icon-left="upload"
+                                    icon-pack="fa"
+                                    @click="openUploadModal"
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-
-    </section>
-    <Footer />
+                </section>
+            </div>
+        </section>
+        <Footer />
     </div>
 </template>
 <style scoped lang="scss">
-    .columns {
-        padding: 2rem;
-    }
+.columns {
+    padding: 2rem;
+}
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
-import Menu from '../Component/Menu.vue';
-import CardPicture from '../Component/CardPicture.vue'
-import Footer from '../Component/Footer.vue';
+import Menu from "../Component/Menu.vue";
+import CardPicture from "../Component/CardPicture.vue";
+import Footer from "../Component/Footer.vue";
 import UploadModal from "../Component/UploadModal";
-
 
 export default {
     name: "Gallery",
@@ -73,7 +79,7 @@ export default {
         Head,
         Menu,
         Footer,
-        CardPicture
+        CardPicture,
     },
     methods: {
         openUploadModal() {
@@ -81,17 +87,14 @@ export default {
                 parent: this,
                 component: UploadModal,
                 hasModalCard: true,
-                customClass: '',
+                customClass: "",
                 trapFocus: true,
                 props: {
-                    "galleryId": this.galleryId
-                }
-            })
-        }
+                    galleryId: this.galleryId,
+                },
+            });
+        },
     },
-    props: [
-        'photos',
-        'galleryId'
-    ],
+    props: ["photos", "galleryId"],
 };
 </script>
