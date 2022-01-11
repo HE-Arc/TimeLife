@@ -28,11 +28,18 @@
                         v-show="publicAlbums.length > 0"
                         class="columns is-multiline"
                     >
-                        <div v-for="n in 4" :key="n" class="column is-half">
+                        <div
+                            v-for="album in publicAlbums"
+                            :key="album.id"
+                            class="column is-half"
+                        >
                             <CardAlbum
-                                title="Vacances a Rome"
-                                username="Bedric Sila"
-                                thumbnail="https://picsum.photos/600/400"
+                                :title="album.name"
+                                :username="
+                                    album.first_name + ' ' + album.last_name
+                                "
+                                :thumbnail="publicAlbumsThumbnails[album.id]"
+                                :link="route('album.gallery', album.id)"
                             />
                         </div>
                     </div>
@@ -61,7 +68,7 @@ img {
     margin-top: 1rem;
     white-space: pre-wrap;
     box-shadow: none;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 </style>
 <script>
@@ -78,6 +85,6 @@ export default {
         Footer,
         CardAlbum,
     },
-    props: ["publicUser", "publicAlbums"],
+    props: ["publicUser", "publicAlbums", "publicAlbumsThumbnails"],
 };
 </script>
