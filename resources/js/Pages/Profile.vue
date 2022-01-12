@@ -6,7 +6,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="container">
-                        <img src="http://placekitten.com/g/200/200" />
+                        <img :src="gravatar" />
                         <div>
                             <h2 class="title is-2">
                                 {{
@@ -54,7 +54,7 @@
 img {
     max-width: 200px;
     border-radius: 50%;
-    padding-right: 1rem;
+    margin-right: 1rem;
 }
 .container {
     display: flex;
@@ -86,8 +86,12 @@ export default {
         Footer,
         CardAlbum,
     },
-
-    props: ["publicUser", "publicAlbums", "user", "publicAlbumsThumbnails"],
-
+    props: [
+        "publicUser",
+        "publicAlbums",
+        "user",
+        "publicAlbumsThumbnails",
+        "gravatar",
+    ],
 };
 </script>
