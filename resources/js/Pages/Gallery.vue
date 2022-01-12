@@ -31,6 +31,14 @@
                         <div class="column">
                             <h1 class="title is-1">Gallery view</h1>
                         </div>
+                        <b-button
+                            type="is-info"
+                            v-if="user.id == album.id_user"
+                            label="Modify Album"
+                            icon-left="pencil-square-o"
+                            icon-pack="fa"
+                            @click="openUpdateModal"
+                        />
                         <div
                             v-show="photos.length > 0"
                             class="column is-narrow"
@@ -116,10 +124,12 @@ a {
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
+
 import Menu from "../Component/Menu.vue";
 import CardPicture from "../Component/CardPicture.vue";
 import Footer from "../Component/Footer.vue";
 import UploadModal from "../Component/UploadModal";
+import UpdateModal from "../Component/UpdateModal";
 
 export default {
     name: "Gallery",
@@ -143,7 +153,19 @@ export default {
                 },
             });
         },
+        openUpdateModal() {
+            this.$buefy.modal.open({
+                parent: this,
+                component: UpdateModal,
+                hasModalCard: true,
+                customClass: "",
+                trapFocus: true,
+                props: {
+                    album: this.album,
+                },
+            });
+        },
     },
-    props: ["photos", "galleryId"],
+    props: ["photos", "galleryId", "album", "user"],
 };
 </script>
