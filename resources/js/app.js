@@ -13,6 +13,13 @@ Vue.mixin({ methods: { route } });
 Vue.use(Buefy, {
     defaultIconPack: 'fa',
 });
+Vue.filter('truncate', function (text, length, suffix) {
+    if (text.length > length) {
+        return text.substring(0, length) + suffix;
+    } else {
+        return text;
+    }
+});
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

@@ -70,9 +70,7 @@
                     </b-field>
 
                     <div class="buttons">
-
                         <button type="submit" class="button is-primary"><strong>Update</strong></button>
-
                     </div>
 
                 </div>

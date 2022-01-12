@@ -30,6 +30,7 @@
                         :title="album.name"
                         :username="album.first_name + ' ' + album.last_name"
                         :thumbnail="myAlbumsThumbnails[album.id]"
+                        :link="route('albums.gallery', album.id)"
                     />
                 </div>
             </div>
@@ -73,6 +74,7 @@
                         :title="album.name"
                         :username="album.first_name + ' ' + album.last_name"
                         :thumbnail="sharedAlbumsThumbnails[album.id]"
+                        :link="route('albums.gallery', album.id)"
                     />
                 </div>
             </div>

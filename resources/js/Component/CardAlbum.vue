@@ -1,11 +1,13 @@
 <template>
     <section>
-        <div class="box is-dark" :style="background">
-            <div class="container has-text-centered is-dark">
-                <p class="title is-4">{{ title }}</p>
-                <p class="subtitle is-6">{{ username }}</p>
+        <a :href="link">
+            <div class="box is-dark" :style="background">
+                <div class="container has-text-centered is-dark">
+                    <p class="title is-4">{{ title }}</p>
+                    <p class="subtitle is-6">{{ username }}</p>
+                </div>
             </div>
-        </div>
+        </a>
     </section>
 </template>
 <style scoped lang="scss">
@@ -22,7 +24,7 @@
 </style>
 <script>
 export default {
-    props: ["title", "username", "thumbnail"],
+    props: ["title", "username", "thumbnail", "link"],
     computed: {
         background() {
             return (

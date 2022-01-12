@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Photo;
+use App\Http\Services\ThumbnailService;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,17 +12,23 @@ use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
 {
+    protected $thumbnailService;
+
+    function __construct(ThumbnailService $thumbnailService){
+        $this->thumbnailService = $thumbnailService;
+    }
+
     public function index(Request $request)
     {
         if(Auth::check())
         {
             // Should be replaced by the user id of the logged user
             $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $myAlbumsThumbnails = $this->getThumbnail($myAlbums);
+            $myAlbumsThumbnails = $this->thumbnailService->getThumbnail($myAlbums);
 
             // Should find a command to get list of sharedAlbums
             $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $sharedAlbumsThumbnails = $this->getThumbnail($sharedAlbums);
+            $sharedAlbumsThumbnails = $this->thumbnailService->getThumbnail($sharedAlbums);
 
 
             return Inertia::render('Album', [
@@ -60,7 +67,8 @@ class AlbumController extends Controller
 
     public function gallery(Request $request, $id)
     {
-        $photos = Photo::join('albums','photos.id_album', '=', 'albums.id')
+        $photos = Photo::select('photos.*')
+            ->join('albums','photos.id_album', '=', 'albums.id')
             ->where('id_album', '=', $id)
             ->get();
         //dd($photos);
@@ -76,31 +84,16 @@ class AlbumController extends Controller
         gallery();
     }
 
-    public function timeline(Request $request)
+    public function timeline(Request $request, int $id)
     {
-        gallery();
+        $photos = Photo::select("date_p", "filename", "photos.name")
+            ->where('id_album', '=', $id)
+            ->orderBy('date_p')
+            ->get();
+
+        return Inertia::render('Timeline', [
+            "photos" => $photos,
+            "albumId" => $id
+        ]);
     }
-
-    private function getThumbnail($albums)
-    {
-        $thumbnail = array();
-
-        foreach ($albums as $album ) {
-            $photo = Photo::where('id_album', '=', $album['id'])
-            ->first();
-            if ($photo) {
-                $thumbnail[$album['id']] = route('storage.url', $photo['filename']);
-            }
-            else {
-                $thumbnail[$album['id']] = "";
-            }
-        }
-        return $thumbnail;
-    }
-
 }
-
-Inertia::share('user', fn (Request $request) => $request->user()
-        ? $request->user()->only('last_name', 'first_name')
-        : null
-);

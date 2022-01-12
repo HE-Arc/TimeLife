@@ -6,7 +6,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="container">
-                        <img src="http://placekitten.com/g/200/200" />
+                        <img :src="gravatar" />
                         <div>
                             <h2 class="title is-2">
                                 {{
@@ -20,7 +20,7 @@
                     </div>
                     <!-- Please do not indent in another way-->
                     <div class="box">{{ publicUser.description }}</div>
-                    <a class="button is-primary" :href="route('updateView')" v-if="user.id == publicUser.id"><strong> Modify Profile </strong></a>
+                    <a class="button is-primary" :href="route('users.edit', user.id)" v-if="user.id === publicUser.id"><strong>Modify Profile</strong></a>
                 </div>
 
                 <div class="column">
@@ -29,11 +29,18 @@
                         v-show="publicAlbums.length > 0"
                         class="columns is-multiline"
                     >
-                        <div v-for="n in 4" :key="n" class="column is-half">
+                        <div
+                            v-for="album in publicAlbums"
+                            :key="album.id"
+                            class="column is-half"
+                        >
                             <CardAlbum
-                                title="Vacances a Rome"
-                                username="Bedric Sila"
-                                thumbnail="https://picsum.photos/600/400"
+                                :title="album.name"
+                                :username="
+                                    album.first_name + ' ' + album.last_name
+                                "
+                                :thumbnail="publicAlbumsThumbnails[album.id]"
+                                :link="route('albums.gallery', album.id)"
                             />
                         </div>
                     </div>
@@ -47,7 +54,7 @@
 img {
     max-width: 200px;
     border-radius: 50%;
-    padding-right: 1rem;
+    margin-right: 1rem;
 }
 .container {
     display: flex;
@@ -62,7 +69,7 @@ img {
     margin-top: 1rem;
     white-space: pre-wrap;
     box-shadow: none;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 </style>
 <script>
@@ -79,6 +86,12 @@ export default {
         Footer,
         CardAlbum,
     },
-    props: ["publicUser", "publicAlbums", "user"],
+    props: [
+        "publicUser",
+        "publicAlbums",
+        "user",
+        "publicAlbumsThumbnails",
+        "gravatar",
+    ],
 };
 </script>

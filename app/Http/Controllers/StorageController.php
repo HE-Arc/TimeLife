@@ -22,4 +22,5 @@ class StorageController
 
         return Storage::disk('album_data')->response($path);
     }
+
 }
