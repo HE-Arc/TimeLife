@@ -20,31 +20,29 @@ use App\Http\Controllers\AlbumController;
 |
 */
 
+// Unrestricted route
 Route::get('/', function () {
-    return Inertia::render('Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'user' => Auth::user()
-    ]);
+    return Inertia::render('Home');
 })->name('home');
 
-Route::resource('/users', UserController::class)->except(['create']);
-Route::get('/join', [UserController::class, 'create'])->name('users.create');
-Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
-
-Route::resource('/albums', AlbumController::class);
-Route::resource('/albums/{id}/photos', PhotoController::class)->except(['show', 'index']);
-Route::get('/albums/{id}/gallery', [AlbumController::class, 'gallery'])->name("albums.gallery");
-Route::get('/albums/{id}/timeline', [AlbumController::class, 'timeline'])->name("albums.timeline");
-Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
-
 Route::get('/login', [UserController::class, 'login'])->name('login');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
+Route::get('/join', [UserController::class, 'create'])->name('users.create');
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
+Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
 
-Route::get('/createAlbum', [AlbumController::class, 'create']);
+// Restricted routes
+Route::middleware(["auth"])->group(function () {
+    Route::resource('/users', UserController::class)->except(['create', 'store']);
 
+    Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
+    Route::resource('/albums', AlbumController::class);
+    Route::resource('/albums/{id}/photos', PhotoController::class)->middleware('ensure.permission')->except(['show', 'index']);
+    Route::get('/albums/{id}/gallery', [AlbumController::class, 'gallery'])->middleware('ensure.permission')->name("albums.gallery");
+    Route::get('/albums/{id}/timeline', [AlbumController::class, 'timeline'])->middleware('ensure.permission')->name("albums.timeline");
+    Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->middleware('ensure.permission')->name("storage.url");
+
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+    Route::get('/createAlbum', [AlbumController::class, 'create']);
+});

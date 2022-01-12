@@ -29,7 +29,7 @@
                     <!-- Column for title and add photos button -->
                     <div class="columns is-vcentered">
                         <div class="column">
-                            <h1 class="title is-1">Gallery view</h1>
+                            <h1 class="title is-1">{{ album.name }}</h1>
                         </div>
                         <b-button
                             type="is-info"
