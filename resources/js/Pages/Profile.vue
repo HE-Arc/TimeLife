@@ -20,12 +20,7 @@
                     </div>
                     <!-- Please do not indent in another way-->
                     <div class="box">{{ publicUser.description }}</div>
-                    <a
-                        class="button is-primary"
-                        :href="route('updateView')"
-                        v-if="user.id == publicUser.id"
-                        ><strong> Modify Profile </strong></a
-                    >
+                    <a class="button is-primary" :href="route('users.edit', user.id)" v-if="user.id === publicUser.id"><strong>Modify Profile</strong></a>
                 </div>
 
                 <div class="column">
@@ -45,7 +40,7 @@
                                     album.first_name + ' ' + album.last_name
                                 "
                                 :thumbnail="publicAlbumsThumbnails[album.id]"
-                                :link="route('album.gallery', album.id)"
+                                :link="route('albums.gallery', album.id)"
                             />
                         </div>
                     </div>
@@ -91,7 +86,6 @@ export default {
         Footer,
         CardAlbum,
     },
-
     props: [
         "publicUser",
         "publicAlbums",

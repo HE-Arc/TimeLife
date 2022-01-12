@@ -48,7 +48,7 @@ class PhotoController extends Controller
         // The insertion is done like that so we can let the database deal with the bulk insertion.
         Photo::insert($photosRows);
 
-        return Redirect::route("album.gallery", ["id" => $id]);
+        return Redirect::route("albums.gallery", ["id" => $id]);
     }
 
     /**
