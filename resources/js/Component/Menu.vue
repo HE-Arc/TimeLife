@@ -8,32 +8,32 @@
                 />
             </b-navbar-item>
         </template>
-        <template #start v-if="user">
+        <template #start v-if="authUser !== null">
             <b-navbar-item :href="route('albums.index')">
                 Albums
             </b-navbar-item>
-            <b-navbar-item :href="route('profile', user.id)">
+            <b-navbar-item :href="route('users.show', authUser.id)">
                 Profile
             </b-navbar-item>
         </template>
 
         <template #end>
-            <b-navbar-item tag="div" v-if="user">
-                Bonjour {{ user.first_name }}
+            <b-navbar-item tag="div" v-if="authUser !== null">
+                Bonjour {{ authUser.first_name }}
             </b-navbar-item>
-            <b-navbar-item tag="div" v-if="user">
+            <b-navbar-item tag="div" v-if="authUser !== null">
                 <div class="buttons">
-                    <a class="button is-primary" href="/logout">
+                    <a class="button is-primary" :href="route('logout')">
                         <strong>Log out</strong>
                     </a>
                 </div>
             </b-navbar-item>
             <b-navbar-item tag="div" v-else>
                 <div class="buttons">
-                    <a class="button is-primary" href="/users">
+                    <a class="button is-primary" :href="route('users.create')">
                         <strong>Sign up</strong>
                     </a>
-                    <a class="button is-light" href="/login"> Log in </a>
+                    <a class="button is-light" :href="route('login')"> Log in </a>
                 </div>
             </b-navbar-item>
         </template>
@@ -42,8 +42,8 @@
 <script>
 export default {
     computed: {
-        user() {
-            return this.$page.props.user;
+        authUser() {
+            return this.$page.props.auth.user;
         },
     },
 };
