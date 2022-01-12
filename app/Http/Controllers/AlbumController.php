@@ -20,30 +20,25 @@ class AlbumController extends Controller
 
     public function index(Request $request)
     {
-        if(Auth::check())
-        {
-            // Should be replaced by the user id of the logged user
-            $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $myAlbumsThumbnails = $this->thumbnailService->getThumbnail($myAlbums);
+        // Should be replaced by the user id of the logged user
+        $myAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('id_user', '=', Auth::user()->id)->join('users', 'users.id', '=', 'albums.id_user')->get();
+        $myAlbumsThumbnails = $this->thumbnailService->getThumbnail($myAlbums);
 
-            // Should find a command to get list of sharedAlbums
-            $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
-            $sharedAlbumsThumbnails = $this->thumbnailService->getThumbnail($sharedAlbums);
+        // Should find a command to get list of sharedAlbums
+        $sharedAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')->where('is_private', '=', 0)->join('users', 'users.id', '=', 'albums.id_user')->get();
+        $sharedAlbumsThumbnails = $this->thumbnailService->getThumbnail($sharedAlbums);
 
+        return Inertia::render('Album', [
+            "myAlbums"=>$myAlbums,
+            "myAlbumsThumbnails"=>$myAlbumsThumbnails,
+            "sharedAlbums"=>$sharedAlbums,
+            "sharedAlbumsThumbnails"=>$sharedAlbumsThumbnails,
+            'user' => Auth::user(),
+        ]);
+    }
 
-            return Inertia::render('Album', [
-                "myAlbums"=>$myAlbums,
-                "myAlbumsThumbnails"=>$myAlbumsThumbnails,
-                "sharedAlbums"=>$sharedAlbums,
-                "sharedAlbumsThumbnails"=>$sharedAlbumsThumbnails,
-                'user' => Auth::user(),
-            ]);
-        }
-        else
-        {
-            return redirect()->route('login')->with('error', 'You have to be connected to access this page');
-        }
-
+    public function show(Request $request, int $id) {
+        return redirect()->route("albums.gallery", $id);
     }
 
     public function create(Request $request)
@@ -84,8 +79,9 @@ class AlbumController extends Controller
             ->join('albums','photos.id_album', '=', 'albums.id')
             ->where('id_album', '=', $id)
             ->get();
-        //dd($photos);
+      
         $album = Album::where('id', '=', $id)->first();
+
         return Inertia::render('Gallery', [
             'user' => Auth::user(),
             "photos" => $photos,
@@ -96,7 +92,7 @@ class AlbumController extends Controller
 
     public function map(Request $request)
     {
-        gallery();
+        // Render Map
     }
 
     public function timeline(Request $request, int $id)

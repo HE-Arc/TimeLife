@@ -25,31 +25,24 @@ class UserController extends Controller
 
     public function show(int $id)
     {
-        if(Auth::check())
-        {
-            $publicUser = User::where('id', '=', $id)->first();
-            $gravatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $publicUser->email ) ) )."?d=mp&s=256";
+        $publicUser = User::where('id', '=', $id)->first();
+        $gravatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $publicUser->email ) ) )."?d=mp&s=256";
 
-            $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
-                ->where('is_private', '=', 0)
-                ->where('id_user', '=', $id)
-                ->join('users', 'users.id', '=', 'albums.id_user')
-                ->get();
+        $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
+            ->where('is_private', '=', 0)
+            ->where('id_user', '=', $id)
+            ->join('users', 'users.id', '=', 'albums.id_user')
+            ->get();
 
-            $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
+        $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
 
-            return Inertia::render('Profile', [
-                "publicUser" => $publicUser,
-                "publicAlbums" => $publicAlbums,
-                "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
-                'gravatar' => $gravatar,
-                'user' => Auth::user(),
-            ]);
-        }
-        else
-        {
-            return redirect()->route('login')->with('error', 'You have to be connected to access this page');
-        }
+        return Inertia::render('Profile', [
+            "publicUser" => $publicUser,
+            "publicAlbums" => $publicAlbums,
+            "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
+            'gravatar' => $gravatar,
+            'user' => Auth::user(),
+        ]);
     }
 
     public function create() {

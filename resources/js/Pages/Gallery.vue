@@ -6,7 +6,7 @@
             <!-- Column for title and add photos button -->
             <div class="columns is-vcentered">
                 <div class="column">
-                    <h1 class="title is-1">Gallery view</h1>
+                    <h1 class="title is-1">{{ album.name }}</h1>
                 </div>
                 <b-button
                     type="is-info"
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <!-- Display message when album is empty -->
+            <!-- Display message when is empty -->
             <div v-show="photos.length < 1">
                 <section class="hero is-fullheight-with-navbar">
                     <div class="hero-body">
