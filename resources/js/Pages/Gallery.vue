@@ -7,17 +7,21 @@
                 <div class="column is-1 leftcolumn">
                     <b-menu class="sidemenu">
                         <b-menu-list>
-                            <b-menu-item
-                                label="Gallery"
-                                icon="picture-o"
-                                icon-pack="fa"
-                                active
-                            ></b-menu-item>
-                            <b-menu-item
-                                label="Timeline"
-                                icon="bar-chart"
-                                icon-pack="fa"
-                            ></b-menu-item>
+                            <a :href="route('albums.gallery', galleryId)">
+                                <b-menu-item
+                                    label="Gallery"
+                                    icon="picture-o"
+                                    icon-pack="fa"
+                                    active
+                                ></b-menu-item
+                            ></a>
+                            <a :href="route('albums.timeline', galleryId)">
+                                <b-menu-item
+                                    label="Timeline"
+                                    icon="bar-chart"
+                                    icon-pack="fa"
+                                ></b-menu-item>
+                            </a>
                         </b-menu-list>
                     </b-menu>
                 </div>
