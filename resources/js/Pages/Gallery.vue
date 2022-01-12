@@ -4,11 +4,14 @@
     <Head title="Gallery" />
     <section>
 
+
+
         <!-- Column for title and add photos button -->
         <div class="columns is-vcentered">
             <div class="column">
                 <h1 class="title is-1">Gallery view</h1>
             </div>
+            <a class="button is-primary" @click="openUpdateModal" v-if="user.id == album.id_user"><strong> Modify Album </strong></a>
             <div v-show="photos.length > 0" class="column is-narrow">
                 <b-button
                     label="Upload pictures"
@@ -18,6 +21,7 @@
                     icon-pack="fa"
                     @click="openUploadModal" />
             </div>
+
         </div>
 
         <!-- Display pictures -->
@@ -61,9 +65,10 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
 import Menu from '../Component/Menu.vue';
-import CardPicture from '../Component/CardPicture.vue'
+import CardPicture from '../Component/CardPicture.vue';
 import Footer from '../Component/Footer.vue';
 import UploadModal from "../Component/UploadModal";
+import UpdateModal from "../Component/UpdateModal";
 
 
 export default {
@@ -87,11 +92,25 @@ export default {
                     "galleryId": this.galleryId
                 }
             })
+        },
+        openUpdateModal() {
+            this.$buefy.modal.open({
+                parent: this,
+                component: UpdateModal,
+                hasModalCard: true,
+                customClass: '',
+                trapFocus: true,
+                props: {
+                    "album": this.album
+                }
+            })
         }
     },
     props: [
         'photos',
-        'galleryId'
+        'galleryId',
+        'album',
+        'user',
     ],
 };
 </script>
