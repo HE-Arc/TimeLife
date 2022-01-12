@@ -30,28 +30,20 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-
-
-
-Route::get('/album/{id}/gallery', [AlbumController::class, 'gallery'])->name("album.gallery");
-Route::get('/album', [AlbumController::class, 'index'])->name('album');
-Route::get('/album/{id}/timeline', [AlbumController::class, 'timeline'])->name("album.timeline");
-
-Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
-
-Route::resource('/albums', AlbumController::class);
-Route::resource('/users', UserController::class);
-Route::resource('/album/{id}/photos', PhotoController::class)->except(['show', 'index']);
-
-Route::get('/login', [UserController::class, 'login'])->name('login');
-
+Route::resource('/users', UserController::class)->except(['create']);
+Route::get('/join', [UserController::class, 'create'])->name('users.create');
 Route::get('/profile/{id}', [UserController::class, 'profile'])->name('profile');
 
-Route::get('/updateUser', [UserController::class, 'updateView'])->name('updateView');
+Route::resource('/albums', AlbumController::class);
+Route::resource('/albums/{id}/photos', PhotoController::class)->except(['show', 'index']);
+Route::get('/albums/{id}/gallery', [AlbumController::class, 'gallery'])->name("albums.gallery");
+Route::get('/albums/{id}/timeline', [AlbumController::class, 'timeline'])->name("albums.timeline");
+Route::get('/albums/data/{path}', StorageController::class)->where('path', '.*')->name("storage.url");
+
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::post('/loginCheck', [UserController::class, 'loginCheck'])->name('loginCheck');
-
-Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/createAlbum', [AlbumController::class, 'create']);
 

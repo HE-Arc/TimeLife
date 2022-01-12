@@ -75,12 +75,13 @@ class AlbumController extends Controller
 
         $album->update($data);
 
-        return redirect()->route('album.gallery', ['id' => $album->id]);
+        return redirect()->route('albums.gallery', ['id' => $album->id]);
     }
 
     public function gallery(Request $request, $id)
     {
-        $photos = Photo::join('albums','photos.id_album', '=', 'albums.id')
+        $photos = Photo::select('photos.*')
+            ->join('albums','photos.id_album', '=', 'albums.id')
             ->where('id_album', '=', $id)
             ->get();
         //dd($photos);
@@ -110,10 +111,4 @@ class AlbumController extends Controller
             "albumId" => $id
         ]);
     }
-
 }
-
-Inertia::share('user', fn (Request $request) => $request->user()
-        ? $request->user()->only('last_name', 'first_name')
-        : null
-);
