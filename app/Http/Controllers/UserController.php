@@ -112,7 +112,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect()->route('profile', ['id' => $user->id]);
+        return redirect()->route('users.show', ['id' => $user->id]);
     }
 
     public function login()
@@ -124,7 +124,7 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return redirect("/");
+        return redirect()->route("home");
     }
 }
 
