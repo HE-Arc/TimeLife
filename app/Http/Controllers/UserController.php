@@ -19,37 +19,11 @@ class UserController extends Controller
         $this->thumbnailService = $thumbnailService;
     }
 
-    public function index()
-    {
-        return Inertia::render('SignUp', [
-
-        ]);
+    public function index() {
+        return redirect()->route('home');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'description' => 'nullable',
-        ]);
-
-        if($request['description'] === null)
-            $request['description'] = " ";
-
-        $password = Hash::make($request['password']);
-
-        $request['password'] = $password;
-
-        User::create($request->all());
-
-        return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');
-
-    }
-
-    public function profile($id)
+    public function show(int $id)
     {
         if(Auth::check())
         {
@@ -74,12 +48,36 @@ class UserController extends Controller
         {
             return redirect()->route('login')->with('error', 'You have to be connected to access this page');
         }
+    }
 
+    public function create() {
+        return Inertia::render('SignUp');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        if($request['description'] === null)
+            $request['description'] = " ";
+
+        $password = Hash::make($request['password']);
+
+        $request['password'] = $password;
+
+        User::create($request->all());
+
+        return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');
     }
 
     public function loginCheck(Request $request)
     {
-
         $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -103,7 +101,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateView()
+    public function edit()
     {
         return Inertia::render('UpdateUser', [
             'user' => Auth::user()
@@ -116,7 +114,6 @@ class UserController extends Controller
 
         return redirect()->route('profile', ['id' => $user->id]);
     }
-
 
     public function login()
     {
