@@ -65,6 +65,19 @@ class AlbumController extends Controller
         return redirect()->route('albums.index');
     }
 
+    public function update(Request $request, Album $album)
+    {
+        $private = $request['isPrivate'] === "true" ? 1 : 0;
+        $data = [
+            'name' => $request['albumName'],
+            'is_private' => $private,
+        ];
+
+        $album->update($data);
+
+        return redirect()->route('albums.gallery', ['id' => $album->id]);
+    }
+
     public function gallery(Request $request, $id)
     {
         $photos = Photo::select('photos.*')
@@ -72,10 +85,12 @@ class AlbumController extends Controller
             ->where('id_album', '=', $id)
             ->get();
         //dd($photos);
+        $album = Album::where('id', '=', $id)->first();
         return Inertia::render('Gallery', [
             'user' => Auth::user(),
             "photos" => $photos,
-            "galleryId" => $id
+            "galleryId" => $id,
+            "album" => $album,
         ]);
     }
 
