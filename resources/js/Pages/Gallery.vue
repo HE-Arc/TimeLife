@@ -6,7 +6,7 @@
             <!-- Column for title and add photos button -->
             <div class="columns is-vcentered">
                 <div class="column">
-                    <h1 class="title is-1">Gallery view</h1>
+                    <h1 class="title is-1">{{ albumName }}</h1>
                 </div>
                 <div v-show="photos.length > 0" class="column is-narrow">
                     <b-button
@@ -95,6 +95,6 @@ export default {
             });
         },
     },
-    props: ["photos", "galleryId"],
+    props: ["photos", "galleryId", "albumName"],
 };
 </script>
