@@ -66,17 +66,20 @@ class AlbumController extends Controller
             ->join('albums','photos.id_album', '=', 'albums.id')
             ->where('id_album', '=', $id)
             ->get();
-        //dd($photos);
+
+        $albumName = Album::select("name")->where("id", "=", $id)->first();
+
         return Inertia::render('Gallery', [
             'user' => Auth::user(),
             "photos" => $photos,
-            "galleryId" => $id
+            "galleryId" => $id,
+            "albumName" => $albumName->name
         ]);
     }
 
     public function map(Request $request)
     {
-        gallery();
+        // Render Map
     }
 
     public function timeline(Request $request, int $id)
