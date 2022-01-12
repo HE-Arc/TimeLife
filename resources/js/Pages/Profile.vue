@@ -6,7 +6,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="container">
-                        <img src="http://placekitten.com/g/200/200" />
+                        <img :src="gravatar" />
                         <div>
                             <h2 class="title is-2">
                                 {{
@@ -20,7 +20,12 @@
                     </div>
                     <!-- Please do not indent in another way-->
                     <div class="box">{{ publicUser.description }}</div>
-                    <a class="button is-primary" :href="route('updateView')" v-if="user.id == publicUser.id"><strong> Modify Profile </strong></a>
+                    <a
+                        class="button is-primary"
+                        :href="route('updateView')"
+                        v-if="user.id == publicUser.id"
+                        ><strong> Modify Profile </strong></a
+                    >
                 </div>
 
                 <div class="column">
@@ -54,7 +59,7 @@
 img {
     max-width: 200px;
     border-radius: 50%;
-    padding-right: 1rem;
+    margin-right: 1rem;
 }
 .container {
     display: flex;
@@ -86,8 +91,13 @@ export default {
         Footer,
         CardAlbum,
     },
-    
-    props: ["publicUser", "publicAlbums", "user", "publicAlbumsThumbnails"],
 
+    props: [
+        "publicUser",
+        "publicAlbums",
+        "user",
+        "publicAlbumsThumbnails",
+        "gravatar",
+    ],
 };
 </script>
