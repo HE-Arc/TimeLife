@@ -11,7 +11,7 @@
             <div class="column">
                 <h1 class="title is-1">Gallery view</h1>
             </div>
-            <a class="button is-primary" @click="openUpdateModal" v-if="user.id == album.id_user"><strong> Modify Album </strong></a>
+            <b-button type="is-info" v-if="user.id == album.id_user" label="Modify Album" icon-left="pencil-square-o" icon-pack="fa" @click="openUpdateModal" />
             <div v-show="photos.length > 0" class="column is-narrow">
                 <b-button
                     label="Upload pictures"
