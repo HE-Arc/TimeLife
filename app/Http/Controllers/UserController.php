@@ -112,7 +112,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect()->route('users.show', ['id' => $user->id]);
+        return redirect()->route('users.show', ['user' => $user->id]);
     }
 
     public function login()
