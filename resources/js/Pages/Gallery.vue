@@ -48,11 +48,14 @@
                         class="columns is-multiline"
                     >
                         <div
-                            v-for="n in 10"
-                            :key="n"
+                            v-for="photo in photos"
+                            :key="photo.id"
                             class="column is-one-quarter"
                         >
-                            <CardPicture />
+                            <CardPicture
+                                :name="photo.name"
+                                :source="route('storage.url', photo.filename)"
+                            />
                         </div>
                     </div>
 
@@ -89,6 +92,7 @@
 .columns {
     padding: 2rem;
 }
+
 .maincolumns {
     padding: 0;
 }

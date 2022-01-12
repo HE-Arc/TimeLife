@@ -19,11 +19,41 @@ class UserController extends Controller
         $this->thumbnailService = $thumbnailService;
     }
 
-    public function index()
-    {
-        return Inertia::render('SignUp', [
+    public function index() {
+        return redirect()->route('home');
+    }
 
-        ]);
+    public function show(int $id)
+    {
+        if(Auth::check())
+        {
+            $publicUser = User::where('id', '=', $id)->first();
+            $gravatar = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $publicUser->email ) ) )."?d=mp&s=256";
+
+            $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
+                ->where('is_private', '=', 0)
+                ->where('id_user', '=', $id)
+                ->join('users', 'users.id', '=', 'albums.id_user')
+                ->get();
+
+            $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
+
+            return Inertia::render('Profile', [
+                "publicUser" => $publicUser,
+                "publicAlbums" => $publicAlbums,
+                "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
+                'gravatar' => $gravatar,
+                'user' => Auth::user(),
+            ]);
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'You have to be connected to access this page');
+        }
+    }
+
+    public function create() {
+        return Inertia::render('SignUp');
     }
 
     public function store(Request $request)
@@ -46,40 +76,10 @@ class UserController extends Controller
         User::create($request->all());
 
         return redirect()->route('home')->with('success', 'You have successfully created your account ! You can now login');
-
-    }
-
-    public function profile($id)
-    {
-        if(Auth::check())
-        {
-            $publicUser = User::where('id', '=', $id)->first();
-
-            $publicAlbums = Album::select('users.first_name', 'users.last_name' ,'albums.*')
-                ->where('is_private', '=', 0)
-                ->where('id_user', '=', $id)
-                ->join('users', 'users.id', '=', 'albums.id_user')
-                ->get();
-
-            $publicAlbumsThumbnails = $this->thumbnailService->getThumbnail($publicAlbums);
-
-            return Inertia::render('Profile', [
-                "publicUser" => $publicUser,
-                "publicAlbums" => $publicAlbums,
-                "publicAlbumsThumbnails" => $publicAlbumsThumbnails,
-                'user' => Auth::user(),
-            ]);
-        }
-        else
-        {
-            return redirect()->route('login')->with('error', 'You have to be connected to access this page');
-        }
-
     }
 
     public function loginCheck(Request $request)
     {
-
         $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -103,7 +103,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateView()
+    public function edit()
     {
         return Inertia::render('UpdateUser', [
             'user' => Auth::user()
@@ -114,9 +114,8 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
-        return redirect()->route('profile', ['id' => $user->id]);
+        return redirect()->route('users.show', ['user' => $user->id]);
     }
-
 
     public function login()
     {
@@ -127,13 +126,8 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return redirect("/");
+        return redirect()->route("home");
     }
 }
-
-Inertia::share('user', fn (Request $request) => $request->user()
-        ? $request->user()->only('last_name', 'first_name')
-        : null
-);
 
 
