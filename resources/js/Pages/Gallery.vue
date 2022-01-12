@@ -110,6 +110,9 @@
     padding-right: 0rem;
     padding-bottom: 2rem;
 }
+a {
+    padding: 0;
+}
 </style>
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue";
