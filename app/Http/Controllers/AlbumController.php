@@ -95,10 +95,4 @@ class AlbumController extends Controller
             "albumId" => $id
         ]);
     }
-
 }
-
-Inertia::share('user', fn (Request $request) => $request->user()
-        ? $request->user()->only('last_name', 'first_name')
-        : null
-);
